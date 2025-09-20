@@ -583,7 +583,7 @@ const GasStationSelection = () => {
             // Se não tem posto selecionado, mostra apenas o botão de continuar sem posto
             <button
               onClick={handleSkip}
-              className="w-full py-4 rounded-2xl font-semibold bg-gray-600 text-white active:scale-95 hover:bg-gray-700 transition-all duration-200"
+              className="w-full py-4 rounded-2xl font-semibold text-gray-600 border border-gray-200 hover:bg-gray-50 transition-all duration-200"
             >
               Continuar sem Posto
             </button>

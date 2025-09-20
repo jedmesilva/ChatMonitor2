@@ -472,7 +472,7 @@ const KilometerageInputScreen = () => {
               disabled={isProcessing}
               className="w-full py-4 rounded-2xl font-semibold text-gray-600 border border-gray-200 hover:bg-gray-50 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              {isProcessing ? 'Salvando...' : 'Continuar sem Quilometragem'}
+              {isProcessing ? 'Salvando...' : 'Finalizar sem Quilometragem'}
             </button>
           )}
         </div>

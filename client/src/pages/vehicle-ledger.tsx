@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect, useCallback } from 'react';
+import { useLocation } from 'wouter';
 import { useQuery } from '@tanstack/react-query';
 import { 
   ChevronDown, 
@@ -551,6 +552,7 @@ const EVENT_TYPES = {
 };
 
 export default function VehicleLedger() {
+  const [, setLocation] = useLocation();
   const [selectedVehicle, setSelectedVehicle] = useState<Vehicle | null>(null);
   const [showVehicleSelector, setShowVehicleSelector] = useState(false);
   const [expandedEvents, setExpandedEvents] = useState(new Set(['1']));
@@ -878,7 +880,11 @@ export default function VehicleLedger() {
               </p>
             </div>
           </div>
-          <button className="p-2 hover:bg-gray-100 rounded-xl" data-testid="button-analytics">
+          <button 
+            onClick={() => setLocation('/monitor')}
+            className="p-2 hover:bg-gray-100 rounded-xl transition-colors" 
+            data-testid="button-analytics"
+          >
             <BarChart3 className="w-5 h-5 text-gray-600" />
           </button>
         </div>

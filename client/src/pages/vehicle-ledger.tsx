@@ -761,24 +761,36 @@ export default function VehicleLedger() {
   const handleSelectMoreOption = (option: any) => {
     switch(option.id) {
       case 'combustivel':
-        setMessage('Registrar abastecimento: ');
+        // Redirecionar para o fluxo de abastecimento
+        setLocation('/abastecimentos');
         break;
       case 'manutencao':
         setMessage('Registrar manutenção: ');
+        setTimeout(() => {
+          if (textareaRef.current) {
+            textareaRef.current.focus();
+            textareaRef.current.setSelectionRange(textareaRef.current.value.length, textareaRef.current.value.length);
+          }
+        }, 100);
         break;
       case 'km':
         setMessage('Atualizar quilometragem: ');
+        setTimeout(() => {
+          if (textareaRef.current) {
+            textareaRef.current.focus();
+            textareaRef.current.setSelectionRange(textareaRef.current.value.length, textareaRef.current.value.length);
+          }
+        }, 100);
         break;
       default:
         setMessage(`${option.label}: `);
+        setTimeout(() => {
+          if (textareaRef.current) {
+            textareaRef.current.focus();
+            textareaRef.current.setSelectionRange(textareaRef.current.value.length, textareaRef.current.value.length);
+          }
+        }, 100);
     }
-
-    setTimeout(() => {
-      if (textareaRef.current) {
-        textareaRef.current.focus();
-        textareaRef.current.setSelectionRange(textareaRef.current.value.length, textareaRef.current.value.length);
-      }
-    }, 100);
   };
 
   const filteredEvents = filterType === 'all' 
@@ -1053,12 +1065,13 @@ export default function VehicleLedger() {
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-3">
               {[
-                { icon: Fuel, label: 'Abastecimento', testId: 'button-fuel' },
-                { icon: Wrench, label: 'Manutenção', testId: 'button-maintenance' },
-                { icon: Camera, label: 'Foto', testId: 'button-camera' },
-              ].map(({ icon: Icon, label, testId }, index) => (
+                { icon: Fuel, label: 'Abastecimento', testId: 'button-fuel', onClick: () => setLocation('/abastecimentos') },
+                { icon: Wrench, label: 'Manutenção', testId: 'button-maintenance', onClick: () => setMessage('Registrar manutenção: ') },
+                { icon: Camera, label: 'Foto', testId: 'button-camera', onClick: () => setMessage('Tirar foto: ') },
+              ].map(({ icon: Icon, label, testId, onClick }, index) => (
                 <button
                   key={index}
+                  onClick={onClick}
                   className="w-9 h-9 rounded-xl bg-gray-100 flex items-center justify-center text-gray-500 hover:bg-gray-200 active:scale-95 transition-all duration-200"
                   data-testid={testId}
                 >

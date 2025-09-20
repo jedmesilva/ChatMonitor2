@@ -104,7 +104,7 @@ export default function VehicleEventCard({
   const cost = typeof event.cost === 'string' ? parseFloat(event.cost) : event.cost;
 
   return (
-    <div className={`bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-4 mb-3 shadow-sm border-l-4 ${config.accent}`}>
+    <div className={`bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-4 mb-3 shadow-sm`}>
       {/* Header Section */}
       <div 
         className="flex items-start justify-between cursor-pointer"

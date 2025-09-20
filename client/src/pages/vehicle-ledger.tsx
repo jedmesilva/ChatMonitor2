@@ -13,12 +13,532 @@ import {
   Camera,
   Plus,
   ArrowUp,
-  Activity
+  Activity,
+  MapPin,
+  TrendingUp,
+  DollarSign,
+  Clock,
+  AlertCircle,
+  MessageCircle
 } from 'lucide-react';
 import { Vehicle, VehicleEvent } from '@shared/schema';
 import VehicleEventCard from '@/components/vehicle-event-card';
 import VehicleSelector from '@/components/vehicle-selector';
 import MoreOptionsModal from '@/components/more-options-modal';
+
+// Componentes de Análise de Combustível - DESIGN ATUALIZADO COM NOVA PALETA
+const FuelAnalysisCard = ({ fuelData, isActive = false }) => {
+  const analysisResults = {
+    consumption: '12.7',
+    efficiency: 'excelente',
+    cost: '6.01',
+    comparison: 'melhor'
+  };
+
+  return (
+    <div className={`bg-white border border-gray-200 rounded-xl p-5 mb-3 shadow-sm ${
+      isActive ? 'ring-1 ring-gray-300' : ''
+    }`}>
+      <div className="flex items-center gap-3 mb-4">
+        <div className={`rounded-xl p-3 ${isActive ? 'bg-gray-800' : 'bg-gray-100'}`}>
+          <Activity className={`w-5 h-5 ${isActive ? 'text-white' : 'text-gray-600'}`} />
+        </div>
+        <div className="flex-1">
+          <h3 className="text-base font-semibold text-gray-900">Análise de Abastecimento</h3>
+          <p className="text-xs text-gray-500">Último abastecimento</p>
+        </div>
+        <span className="inline-flex items-center px-2.5 py-1 rounded-lg text-xs font-medium bg-green-50 text-green-700 border border-green-100">
+          <CheckCircle className="w-3 h-3 mr-1" />
+          OK
+        </span>
+      </div>
+
+      <div className="space-y-3">
+        <div className="flex items-center justify-between py-2">
+          <span className="text-sm text-gray-600">Volume</span>
+          <span className="text-sm font-bold text-gray-900">{fuelData?.liters || 42.5}L</span>
+        </div>
+
+        <div className="bg-gray-50 rounded-xl p-3 space-y-2">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <TrendingUp className="w-4 h-4 text-gray-600" />
+              <span className="text-xs text-gray-700 font-medium">Consumo</span>
+            </div>
+            <span className="text-sm font-bold text-gray-900">{analysisResults.consumption} km/L</span>
+          </div>
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <DollarSign className="w-4 h-4 text-gray-600" />
+              <span className="text-xs text-gray-700 font-medium">Preço/L</span>
+            </div>
+            <span className="text-sm font-bold text-gray-900">R$ {analysisResults.cost}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const PriceComparisonCard = ({ currentPrice, isActive = false }) => {
+  const nearbyStations = [
+    { name: 'Shell Vila', price: 5.85, distance: 2.1, savings: -0.16 },
+    { name: 'Petrobras Centro', price: 6.15, distance: 1.5, savings: 0.14 },
+    { name: 'Ipiranga Norte', price: 5.92, distance: 3.2, savings: -0.09 }
+  ];
+
+  return (
+    <div className={`bg-white border border-gray-200 rounded-xl p-5 mb-3 shadow-sm ${
+      isActive ? 'ring-1 ring-gray-300' : ''
+    }`}>
+      <div className="flex items-center gap-3 mb-4">
+        <div className={`rounded-xl p-3 ${isActive ? 'bg-gray-800' : 'bg-gray-100'}`}>
+          <DollarSign className={`w-5 h-5 ${isActive ? 'text-white' : 'text-gray-600'}`} />
+        </div>
+        <div>
+          <h3 className="text-base font-semibold text-gray-900">Preços Próximos</h3>
+          <p className="text-xs text-gray-500">Postos na região</p>
+        </div>
+      </div>
+
+      <div className="space-y-3">
+        {nearbyStations.map((station, index) => (
+          <div key={index} className="bg-gray-50 rounded-xl p-3">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                <MapPin className="w-4 h-4 text-gray-500" />
+                <div>
+                  <span className="text-sm font-medium text-gray-900">{station.name}</span>
+                  <p className="text-xs text-gray-500">{station.distance}km</p>
+                </div>
+              </div>
+              <div className="text-right">
+                <span className="text-sm font-bold text-gray-900">R$ {station.price.toFixed(2)}</span>
+                <p className={`text-xs font-medium ${station.savings < 0 ? 'text-green-600' : 'text-red-600'}`}>
+                  {station.savings < 0 ? '↓' : '↑'} {Math.abs(station.savings).toFixed(2)}
+                </p>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
+
+const ConsumptionTrendsCard = ({ isActive = false }) => {
+  const [expandedSection, setExpandedSection] = useState(false);
+
+  const monthlyData = [
+    { month: 'Jan', consumption: 12.5, efficiency: 'boa' },
+    { month: 'Fev', consumption: 13.2, efficiency: 'excelente' },
+    { month: 'Mar', consumption: 12.8, efficiency: 'boa' },
+    { month: 'Abr', consumption: 13.1, efficiency: 'excelente' }
+  ];
+
+  return (
+    <div className={`bg-white border border-gray-200 rounded-xl p-5 mb-3 shadow-sm ${
+      isActive ? 'ring-1 ring-gray-300' : ''
+    }`}>
+      <div 
+        className="flex items-center justify-between cursor-pointer"
+        onClick={() => setExpandedSection(!expandedSection)}
+      >
+        <div className="flex items-center gap-3">
+          <div className={`rounded-xl p-3 ${isActive ? 'bg-gray-800' : 'bg-gray-100'}`}>
+            <BarChart3 className={`w-5 h-5 ${isActive ? 'text-white' : 'text-gray-600'}`} />
+          </div>
+          <div>
+            <h3 className="text-base font-semibold text-gray-900">Tendências</h3>
+            <p className="text-xs text-gray-500">Últimos meses</p>
+          </div>
+        </div>
+        <button className="p-2 hover:bg-gray-100 rounded-xl transition-colors">
+          {expandedSection ? (
+            <ChevronUp className="w-4 h-4 text-gray-600" />
+          ) : (
+            <ChevronDown className="w-4 h-4 text-gray-600" />
+          )}
+        </button>
+      </div>
+
+      {expandedSection && (
+        <div className="mt-4 pt-4 border-t border-gray-100 space-y-3">
+          {monthlyData.map((data, index) => (
+            <div key={index} className="flex items-center justify-between py-2">
+              <span className="text-sm text-gray-700 font-medium">{data.month}</span>
+              <div className="flex items-center gap-3">
+                <span className="text-sm font-medium text-gray-900">{data.consumption} km/L</span>
+                <span className={`px-2 py-1 rounded-lg text-xs font-medium ${
+                  data.efficiency === 'excelente' 
+                    ? 'bg-green-50 text-green-700 border border-green-100' 
+                    : 'bg-amber-50 text-amber-700 border border-amber-100'
+                }`}>
+                  {data.efficiency}
+                </span>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+};
+
+const VehicleStatsCard = ({ isActive = false }) => {
+  const stats = {
+    totalKm: 45750,
+    avgConsumption: 12.9,
+    totalSpent: 1250.80,
+    fuelUps: 24
+  };
+
+  return (
+    <div className={`bg-white border border-gray-200 rounded-xl p-5 mb-3 shadow-sm ${
+      isActive ? 'ring-1 ring-gray-300' : ''
+    }`}>
+      <div className="flex items-center gap-3 mb-4">
+        <div className={`rounded-xl p-3 ${isActive ? 'bg-gray-800' : 'bg-gray-100'}`}>
+          <Car className={`w-5 h-5 ${isActive ? 'text-white' : 'text-gray-600'}`} />
+        </div>
+        <div>
+          <h3 className="text-base font-semibold text-gray-900">Estatísticas</h3>
+          <p className="text-xs text-gray-500">Resumo do veículo</p>
+        </div>
+      </div>
+
+      <div className="grid grid-cols-2 gap-3">
+        <div className="bg-gray-50 rounded-xl p-3">
+          <p className="text-xs text-gray-500 mb-1 font-medium">Total KM</p>
+          <p className="text-base font-bold text-gray-900">{stats.totalKm.toLocaleString()}</p>
+        </div>
+        <div className="bg-gray-50 rounded-xl p-3">
+          <p className="text-xs text-gray-500 mb-1 font-medium">Consumo Médio</p>
+          <p className="text-base font-bold text-gray-900">{stats.avgConsumption} km/L</p>
+        </div>
+        <div className="bg-gray-50 rounded-xl p-3">
+          <p className="text-xs text-gray-500 mb-1 font-medium">Gasto Total</p>
+          <p className="text-base font-bold text-gray-900">R$ {stats.totalSpent.toFixed(0)}</p>
+        </div>
+        <div className="bg-gray-50 rounded-xl p-3">
+          <p className="text-xs text-gray-500 mb-1 font-medium">Abastecimentos</p>
+          <p className="text-base font-bold text-gray-900">{stats.fuelUps}</p>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const InsightsCard = ({ insights = [], isAlert = false }) => {
+  return (
+    <div className="space-y-3 mb-4">
+      {insights.map((insight, index) => {
+        const colorClasses = isAlert ? {
+          bg: 'bg-amber-50',
+          border: 'border-amber-100',
+          icon: 'text-amber-600',
+          text: 'text-amber-800'
+        } : {
+          bg: 'bg-gray-50',
+          border: 'border-gray-100',
+          icon: 'text-gray-600',
+          text: 'text-gray-800'
+        };
+
+        return (
+          <div key={index} className={`${colorClasses.bg} ${colorClasses.border} border rounded-xl p-4`}>
+            <div className="flex items-center gap-3">
+              <insight.icon className={`w-4 h-4 ${colorClasses.icon}`} />
+              <span className={`text-sm font-medium ${colorClasses.text}`}>{insight.text}</span>
+            </div>
+          </div>
+        );
+      })}
+    </div>
+  );
+};
+
+// Mock data baseado nas mensagens do chat original
+const chatHistory = [
+  {
+    id: 1,
+    type: 'user',
+    content: 'Abasteci 42,5L no Shell Centro por R$ 255,30',
+    timestamp: '14:30',
+    date: '2025-09-20',
+    category: 'abastecimento',
+    data: { liters: 42.5, price: 255.30, station: 'Shell Centro', km: 45230, kmTraveled: 540 }
+  },
+  {
+    id: 2,
+    type: 'kmonitor',
+    content: 'Perfeito! Analisei seu abastecimento em detalhes. Seu consumo está excelente e você fez uma boa escolha de posto.',
+    timestamp: '14:31',
+    date: '2025-09-20',
+    category: 'analise',
+    showAnalysis: true,
+    analysisData: { liters: 42.5, price: 255.30, station: 'Shell Centro', km: 45230, kmTraveled: 540 }
+  },
+  {
+    id: 3,
+    type: 'user',
+    content: 'Foto do painel',
+    timestamp: '09:15',
+    date: '2025-09-20',
+    category: 'foto',
+    isImage: true
+  },
+  {
+    id: 4,
+    type: 'kmonitor',
+    content: 'Identifiquei os dados da sua foto! Quilometragem atual é 44.690 km, com boa autonomia restante.',
+    timestamp: '09:16',
+    date: '2025-09-20',
+    category: 'analise',
+    insights: [
+      { icon: MapPin, text: '380 km desde último abastecimento' },
+      { icon: Fuel, text: 'Autonomia: ~160 km restantes' },
+      { icon: Clock, text: 'Próximo abastecimento: em 2 dias' }
+    ]
+  },
+  {
+    id: 5,
+    type: 'kmonitor',
+    content: 'Alerta de preços na sua região! Encontrei oportunidades de economia.',
+    timestamp: '19:20',
+    date: '2025-09-19',
+    category: 'alerta',
+    isAlert: true,
+    insights: [
+      { icon: TrendingUp, text: 'Gasolina subiu R$ 0,15 centavos' },
+      { icon: MapPin, text: 'Shell Vila: R$ 5,85 (mais barato)' },
+      { icon: Clock, text: 'Melhor horário: terça de manhã' }
+    ]
+  },
+  {
+    id: 6,
+    type: 'user',
+    content: 'Como está meu consumo médio?',
+    timestamp: '10:30',
+    date: '2025-09-19',
+    category: 'duvida'
+  },
+  {
+    id: 7,
+    type: 'kmonitor',
+    content: 'Seu consumo está muito bom! Veja os detalhes e tendências dos últimos meses:',
+    timestamp: '10:31',
+    date: '2025-09-19',
+    category: 'analise',
+    showTrends: true
+  }
+];
+
+function getCategoryIcon(category) {
+  switch (category) {
+    case 'abastecimento':
+      return <Fuel size={16} className="text-blue-600" />;
+    case 'analise':
+      return <Activity size={16} className="text-green-600" />;
+    case 'foto':
+      return <Camera size={16} className="text-purple-600" />;
+    case 'alerta':
+      return <AlertCircle size={16} className="text-amber-600" />;
+    case 'duvida':
+      return <MessageCircle size={16} className="text-gray-600" />;
+    default:
+      return <MessageCircle size={16} className="text-gray-600" />;
+  }
+}
+
+function getCategoryBg(category, isUser) {
+  if (isUser) return 'bg-gray-800 border-gray-700';
+
+  switch (category) {
+    case 'abastecimento':
+      return 'bg-blue-50 border-blue-100';
+    case 'analise':
+      return 'bg-green-50 border-green-100';
+    case 'foto':
+      return 'bg-purple-50 border-purple-100';
+    case 'alerta':
+      return 'bg-amber-50 border-amber-100';
+    case 'duvida':
+      return 'bg-white border-gray-200';
+    default:
+      return 'bg-white border-gray-200';
+  }
+}
+
+function ChatHistoryContent() {
+  const formatDate = (dateStr) => {
+    const today = new Date();
+    const date = new Date(dateStr);
+    const diffTime = Math.abs(today - date);
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+    if (diffDays === 1) return 'Hoje';
+    if (diffDays === 2) return 'Ontem';
+    if (diffDays <= 7) return `${diffDays - 1} dias atrás`;
+
+    return date.toLocaleDateString('pt-BR', { day: '2-digit', month: 'short' });
+  };
+
+  // Group messages by date and sort by date (oldest first, newest last)
+  const groupedHistory = {};
+  chatHistory.forEach(message => {
+    const dateKey = formatDate(message.date);
+    if (!groupedHistory[dateKey]) {
+      groupedHistory[dateKey] = [];
+    }
+    groupedHistory[dateKey].push(message);
+  });
+
+  // Sort groups by date (oldest to newest)
+  const sortedGroupEntries = Object.entries(groupedHistory).sort(([dateA], [dateB]) => {
+    // Convert display dates back to actual dates for sorting
+    const getActualDate = (displayDate) => {
+      if (displayDate === 'Hoje') return new Date();
+      if (displayDate === 'Ontem') {
+        const yesterday = new Date();
+        yesterday.setDate(yesterday.getDate() - 1);
+        return yesterday;
+      }
+      // For other dates, find the original date from chatHistory
+      const message = chatHistory.find(m => formatDate(m.date) === displayDate);
+      return message ? new Date(message.date) : new Date();
+    };
+
+    return getActualDate(dateA) - getActualDate(dateB);
+  });
+
+  return (
+    <div className="max-w-4xl mx-auto px-4 pt-6 h-full">
+      <div className="space-y-6">
+        {sortedGroupEntries.map(([dateGroup, messages]) => (
+          <div key={dateGroup}>
+            <h2 className="text-sm font-medium text-gray-500 uppercase tracking-wide mb-3 flex items-center gap-2">
+              <Calendar size={14} />
+              {dateGroup}
+            </h2>
+
+            <div className="space-y-4">
+              {messages.map(message => {
+                const isUser = message.type === 'user';
+
+                return (
+                  <div key={message.id} className={`flex ${isUser ? 'justify-end' : 'justify-start'} mb-6`}>
+                    <div className={`max-w-[85%] rounded-2xl p-5 shadow-sm border ${
+                      isUser 
+                        ? 'bg-gray-800 border-gray-700 text-white' 
+                        : 'bg-white border-gray-200 text-gray-900'
+                    }`}>
+
+                      {/* Header */}
+                      <div className="flex items-center justify-between mb-3">
+                        <div className="flex items-center space-x-3">
+                          {!isUser && (
+                            <div className="w-7 h-7 bg-gray-800 rounded-xl flex items-center justify-center">
+                              <span className="text-sm font-bold text-white">K</span>
+                            </div>
+                          )}
+                          <span className={`text-xs font-medium ${
+                            isUser ? 'text-gray-300' : 'text-gray-500'
+                          }`}>
+                            {isUser ? 'Você' : 'Kmonitor'}
+                          </span>
+                        </div>
+                        <span className={`text-xs ${
+                          isUser ? 'text-gray-300' : 'text-gray-500'
+                        }`}>
+                          {message.timestamp}
+                        </span>
+                      </div>
+
+                      {/* Content */}
+                      <div className={`${
+                        (message.showAnalysis || message.showTrends || message.insights) ? 'mb-4' : 'mb-0'
+                      }`}>
+                        {message.isImage ? (
+                          <div>
+                            <p className={`mb-3 ${isUser ? 'text-white' : 'text-gray-900'}`}>
+                              {message.content}
+                            </p>
+                            <div className={`mt-3 px-3 py-2 rounded-lg ${isUser ? 'bg-gray-700' : 'bg-gray-100'}`}>
+                              <div className="flex items-center gap-2">
+                                <Camera size={14} className={isUser ? 'text-gray-300' : 'text-gray-600'} />
+                                <span className={`text-xs ${isUser ? 'text-gray-300' : 'text-gray-600'}`}>
+                                  Imagem do painel enviada
+                                </span>
+                              </div>
+                            </div>
+                          </div>
+                        ) : (
+                          <p className={isUser ? 'text-white' : 'text-gray-900'}>
+                            {message.content}
+                          </p>
+                        )}
+                      </div>
+
+                      {/* Data Details */}
+                      {message.data && (
+                        <div className={`mt-3 p-3 rounded-lg ${isUser ? 'bg-gray-700' : 'bg-gray-100'}`}>
+                          <div className="grid grid-cols-2 gap-2 text-xs">
+                            <div>
+                              <span className={isUser ? 'text-gray-300' : 'text-gray-500'}>Volume:</span>
+                              <span className={`font-medium ml-1 ${isUser ? 'text-white' : 'text-gray-900'}`}>
+                                {message.data.liters}L
+                              </span>
+                            </div>
+                            <div>
+                              <span className={isUser ? 'text-gray-300' : 'text-gray-500'}>Total:</span>
+                              <span className={`font-medium ml-1 ${isUser ? 'text-white' : 'text-gray-900'}`}>
+                                R$ {message.data.price.toFixed(2)}
+                              </span>
+                            </div>
+                            <div className="col-span-2">
+                              <span className={isUser ? 'text-gray-300' : 'text-gray-500'}>Local:</span>
+                              <span className={`font-medium ml-1 ${isUser ? 'text-white' : 'text-gray-900'}`}>
+                                {message.data.station}
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                      )}
+
+                      {/* Análise Completa de Combustível */}
+                      {message.showAnalysis && (
+                        <div className="space-y-4">
+                          <FuelAnalysisCard fuelData={message.analysisData} isActive={true} />
+                          <PriceComparisonCard currentPrice={message.analysisData?.price / message.analysisData?.liters} isActive={false} />
+                          <ConsumptionTrendsCard isActive={false} />
+                          <VehicleStatsCard isActive={false} />
+                        </div>
+                      )}
+
+                      {/* Tendências apenas */}
+                      {message.showTrends && (
+                        <div className="space-y-4">
+                          <ConsumptionTrendsCard isActive={true} />
+                          <VehicleStatsCard isActive={true} />
+                        </div>
+                      )}
+
+                      {/* Insights */}
+                      {message.insights && (
+                        <InsightsCard insights={message.insights} isAlert={message.isAlert} />
+                      )}
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
 
 const EVENT_TYPES = {
   FUEL: 'fuel',
@@ -41,7 +561,7 @@ export default function VehicleLedger() {
   const [selectedItems] = useState(3);
   const [textareaHeight, setTextareaHeight] = useState(120); // Increased default to better match actual size
   const [chatmonitorHeaderHeight] = useState(55);
-  
+
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -97,11 +617,11 @@ export default function VehicleLedger() {
       if (showVehicleSelector) {
         const vehicleSelector = document.querySelector('[data-testid="vehicle-selector"]');
         const headerVehicleSection = document.querySelector('[data-testid="header-vehicle"]');
-        
+
         if (vehicleSelector && headerVehicleSection) {
           const isClickInsideSelector = vehicleSelector.contains(event.target as Node);
           const isClickInsideHeader = headerVehicleSection.contains(event.target as Node);
-          
+
           if (!isClickInsideSelector && !isClickInsideHeader) {
             setShowVehicleSelector(false);
           }
@@ -163,10 +683,10 @@ export default function VehicleLedger() {
   // Auto-resize textarea
   const handleTextareaChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setMessage(e.target.value);
-    
+
     // Reset height to auto to get the correct scrollHeight
     e.target.style.height = 'auto';
-    
+
     // Set height based on scrollHeight, with min and max limits
     const newHeight = Math.min(Math.max(e.target.scrollHeight, 24), 128); // min 24px, max 128px
     e.target.style.height = newHeight + 'px';
@@ -186,7 +706,7 @@ export default function VehicleLedger() {
       default:
         setMessage(`${option.label}: `);
     }
-    
+
     setTimeout(() => {
       if (textareaRef.current) {
         textareaRef.current.focus();
@@ -200,7 +720,7 @@ export default function VehicleLedger() {
     : vehicleEvents.filter(event => event.type === filterType);
 
   // Function to format date for grouping
-  const formatDate = (dateStr: string) => {
+  const formatDate = (dateStr) => {
     const today = new Date();
     const date = new Date(dateStr);
     const diffTime = Math.abs(today.getTime() - date.getTime());
@@ -209,7 +729,7 @@ export default function VehicleLedger() {
     if (diffDays === 1) return 'Hoje';
     if (diffDays === 2) return 'Ontem';
     if (diffDays <= 7) return `${diffDays - 1} dias atrás`;
-    
+
     return date.toLocaleDateString('pt-BR', { day: '2-digit', month: 'short', year: 'numeric' });
   };
 
@@ -236,7 +756,7 @@ export default function VehicleLedger() {
       const event = filteredEvents.find(e => formatDate(e.created_at || e.date || new Date().toISOString()) === displayDate);
       return event ? new Date(event.created_at || event.date || new Date()) : new Date();
     };
-    
+
     return getActualDate(dateA).getTime() - getActualDate(dateB).getTime();
   });
 
@@ -367,7 +887,7 @@ export default function VehicleLedger() {
                   </div>
                   <div className="flex-1 h-px bg-gray-200"></div>
                 </div>
-                
+
                 {/* Events for this date */}
                 <div className="space-y-4">
                   {events.map((event) => (
@@ -383,7 +903,7 @@ export default function VehicleLedger() {
             ))}
           </div>
         )}
-        
+
         <div ref={messagesEndRef} />
       </div>
 
@@ -404,7 +924,7 @@ export default function VehicleLedger() {
                 <div className="flex items-center gap-3">
                   <span className="text-sm font-medium">Chatmonitor</span>
                 </div>
-                
+
                 <button 
                   onClick={toggleChatmonitorExpansion}
                   className="w-8 h-8 rounded-full bg-gray-700 hover:bg-gray-600 flex items-center justify-center transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50"
@@ -415,29 +935,17 @@ export default function VehicleLedger() {
               </div>
             </div>
           </div>
-          
+
           {/* Expanded Content */}
           {isChatmonitorExpanded && (
             <div 
-              className="flex-1 overflow-y-auto bg-white min-h-0" 
+              className="flex-1 overflow-y-auto bg-gray-50 min-h-0" 
               style={{ 
                 height: `calc(100vh - ${textareaHeight}px - 55px)`,
                 maxHeight: `calc(100vh - ${textareaHeight}px - 55px)`
               }}
             >
-              <div className="max-w-4xl mx-auto h-full">
-                <div className="px-4 pt-6 h-full">
-                  <div className="flex items-center justify-center min-h-[300px] h-full">
-                    <div className="text-center">
-                      <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <Activity className="w-8 h-8 text-gray-400" />
-                      </div>
-                      <h3 className="text-lg font-medium text-gray-900 mb-2">Chatmonitor</h3>
-                      <p className="text-gray-500">Em breve, funcionalidades de chat serão implementadas aqui.</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              <ChatHistoryContent />
             </div>
           )}
         </div>
@@ -480,7 +988,7 @@ export default function VehicleLedger() {
                   <Icon size={16} />
                 </button>
               ))}
-              
+
               {/* More Options Button */}
               <button
                 onClick={() => setShowMoreOptions(true)}

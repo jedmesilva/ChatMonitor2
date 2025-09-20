@@ -450,31 +450,21 @@ const KilometerageInputScreen = () => {
       <div className="fixed bottom-0 left-0 right-0 p-4 bg-white border-t border-gray-200">
         <div className="space-y-3">
           {km ? (
-            // Se tem KM informado, mostra botão primário de finalizar + botão secundário de pular
-            <>
-              <button
-                onClick={handleSubmit}
-                disabled={isProcessing}
-                className={`w-full py-4 rounded-2xl font-semibold transition-all duration-200 ${
-                  !isProcessing
-                    ? 'bg-blue-600 text-white active:scale-95 hover:bg-blue-700'
-                    : 'bg-gray-100 text-gray-400 cursor-not-allowed'
-                }`}
-              >
-                {isProcessing 
-                  ? 'Salvando...' 
-                  : `Finalizar com KM ${km}`
-                }
-              </button>
-              
-              <button
-                onClick={skipKm}
-                disabled={isProcessing}
-                className="w-full py-3 rounded-2xl font-medium text-gray-600 border border-gray-200 hover:bg-gray-50 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
-              >
-                Pular Quilometragem
-              </button>
-            </>
+            // Se tem KM informado, mostra apenas o botão de finalizar (primário)
+            <button
+              onClick={handleSubmit}
+              disabled={isProcessing}
+              className={`w-full py-4 rounded-2xl font-semibold transition-all duration-200 ${
+                !isProcessing
+                  ? 'bg-blue-600 text-white active:scale-95 hover:bg-blue-700'
+                  : 'bg-gray-100 text-gray-400 cursor-not-allowed'
+              }`}
+            >
+              {isProcessing 
+                ? 'Salvando...' 
+                : `Finalizar com KM ${km}`
+              }
+            </button>
           ) : (
             // Se não tem KM informado, mostra apenas botão de continuar sem KM (secundário)
             <button

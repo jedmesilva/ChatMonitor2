@@ -943,7 +943,7 @@ export default function VehicleLedger() {
               style={{ 
                 height: `calc(100vh - ${textareaHeight}px - 55px)`,
                 maxHeight: `calc(100vh - ${textareaHeight}px - 55px)`,
-                paddingBottom: `${textareaHeight + 20}px`
+                paddingBottom: `${textareaHeight + 60}px`
               }}
             >
               <ChatHistoryContent />

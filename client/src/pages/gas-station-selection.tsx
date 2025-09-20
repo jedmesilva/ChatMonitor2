@@ -180,13 +180,13 @@ const GasStationSelection = () => {
   };
 
   const handleContinue = () => {
-    // Navegar para a próxima etapa (registrar abastecimento)
-    setLocation('/abastecimentos/registrar');
+    // Navegar para a próxima etapa (registrar combustível)
+    setLocation('/abastecimentos/combustivel');
   };
 
   const handleSkip = () => {
     // Navegar para a próxima etapa sem posto selecionado
-    setLocation('/abastecimentos/registrar');
+    setLocation('/abastecimentos/combustivel');
   };
 
   return (

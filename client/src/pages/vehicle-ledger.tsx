@@ -564,6 +564,7 @@ export default function VehicleLedger() {
   const [chatHistory, setChatHistory] = useState(initialChatHistory);
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const chatScrollRef = useRef<HTMLDivElement>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -584,6 +585,13 @@ export default function VehicleLedger() {
       setSelectedVehicle(vehicles[0]);
     }
   }, [vehicles, selectedVehicle]);
+
+  // Auto-scroll to bottom when chat history changes or when chat monitor expands
+  useEffect(() => {
+    if (isChatmonitorExpanded && messagesEndRef.current) {
+      messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, [chatHistory, isChatmonitorExpanded]);
 
   const isMessageEmpty = !message.trim();
 
@@ -976,6 +984,7 @@ export default function VehicleLedger() {
           {/* Expanded Content */}
           {isChatmonitorExpanded && (
             <div 
+              ref={chatScrollRef}
               className="flex-1 overflow-y-auto bg-gray-50 min-h-0" 
               style={{ 
                 height: `calc(100vh - ${textareaHeight}px - 55px)`,
@@ -984,6 +993,7 @@ export default function VehicleLedger() {
             >
               <div style={{ paddingBottom: `${textareaHeight + 60}px` }}>
                 <ChatHistoryContent chatHistory={chatHistory} />
+                <div ref={messagesEndRef} />
               </div>
             </div>
           )}

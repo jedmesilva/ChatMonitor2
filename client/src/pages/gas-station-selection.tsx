@@ -11,9 +11,22 @@ import {
   Plus
 } from 'lucide-react';
 
+// Tipos para as estações de combustível
+interface Station {
+  id: number;
+  name: string;
+  brand: string;
+  address: string;
+  distance?: string;
+  isFavorite: boolean;
+  lastVisit?: string;
+  isUserAdded?: boolean;
+  prices: Record<string, string>;
+}
+
 const GasStationSelection = () => {
   const [, setLocation] = useLocation();
-  const [selectedStation, setSelectedStation] = useState(null);
+  const [selectedStation, setSelectedStation] = useState<Station | null>(null);
   const [stationSearch, setStationSearch] = useState('');
   const [showStationSearch, setShowStationSearch] = useState(false);
   const [showAddStation, setShowAddStation] = useState(false);
@@ -132,7 +145,7 @@ const GasStationSelection = () => {
     );
   };
 
-  const handleStationSelect = (station) => {
+  const handleStationSelect = (station: Station) => {
     setSelectedStation(station);
     setShowStationSearch(false);
     setShowAddStation(false);

@@ -215,8 +215,8 @@ const FuelHistoryScreen = () => {
     avgPrice: { value: 5.11, change: +0.12, trend: 'up' }
   };
 
-  const formatCurrency = (value) => `R$ ${value.toFixed(2).replace('.', ',')}`;
-  const formatDate = (dateStr) => {
+  const formatCurrency = (value: number) => `R$ ${value.toFixed(2).replace('.', ',')}`;
+  const formatDate = (dateStr: string) => {
     const date = new Date(dateStr);
     return date.toLocaleDateString('pt-BR', { 
       day: '2-digit', 
@@ -225,7 +225,7 @@ const FuelHistoryScreen = () => {
     });
   };
 
-  const getTrendIcon = (trend) => {
+  const getTrendIcon = (trend: string) => {
     switch (trend) {
       case 'up': return <TrendingUp className="w-4 h-4 text-red-600" />;
       case 'down': return <TrendingDown className="w-4 h-4 text-green-600" />;
@@ -233,7 +233,7 @@ const FuelHistoryScreen = () => {
     }
   };
 
-  const getTrendColor = (trend) => {
+  const getTrendColor = (trend: string) => {
     switch (trend) {
       case 'up': return 'text-red-600';
       case 'down': return 'text-green-600';
@@ -241,8 +241,8 @@ const FuelHistoryScreen = () => {
     }
   };
 
-  const getFuelTypeColor = (type) => {
-    const colors = {
+  const getFuelTypeColor = (type: string) => {
+    const colors: Record<string, string> = {
       'Gasolina Comum': 'bg-red-100 text-red-800',
       'Gasolina Aditivada': 'bg-red-100 text-red-800',
       'Etanol': 'bg-green-100 text-green-800',

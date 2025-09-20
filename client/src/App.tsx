@@ -10,6 +10,7 @@ import FuelHistoryScreen from "@/pages/fuel-history";
 import GasStationSelectionScreen from "@/pages/gas-station-selection";
 import FuelEntryScreen from "./pages/fuel-entry";
 import KilometerageInputScreen from "./pages/kilometerage-input";
+import FuelSummaryScreen from "./pages/fuel-summary";
 
 function Router() {
   return (
@@ -19,6 +20,7 @@ function Router() {
       <Route path="/abastecimentos/posto" component={GasStationSelectionScreen} />
       <Route path="/abastecimentos/combustivel" component={FuelEntryScreen} />
       <Route path="/abastecimentos/quilometragem" component={KilometerageInputScreen} />
+      <Route path="/abastecimentos/resumo" component={FuelSummaryScreen} />
       <Route path="/abastecimentos" component={FuelHistoryScreen} />
       <Route component={NotFound} />
     </Switch>

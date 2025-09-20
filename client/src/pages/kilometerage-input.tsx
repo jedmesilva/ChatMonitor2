@@ -105,16 +105,12 @@ const KilometerageInputScreen = () => {
       
       setTimeout(() => {
         setIsProcessing(false);
-        setShowSuccess(true);
-        
-        setTimeout(() => {
-          console.log('Abastecimento salvo:', { 
-            station: selectedStation, 
-            fuelItems, 
-            km: km ? parseInt(km.replace(/[^\d]/g, '')) : null 
-          });
-          setLocation('/abastecimentos');
-        }, 1500);
+        console.log('Abastecimento salvo:', { 
+          station: selectedStation, 
+          fuelItems, 
+          km: km ? parseInt(km.replace(/[^\d]/g, '')) : null 
+        });
+        setLocation('/abastecimentos/resumo');
       }, 800);
     }
   };
@@ -124,15 +120,11 @@ const KilometerageInputScreen = () => {
     
     setTimeout(() => {
       setIsProcessing(false);
-      setShowSuccess(true);
-      
-      setTimeout(() => {
-        console.log('Abastecimento salvo sem KM:', { 
-          station: selectedStation, 
-          fuelItems 
-        });
-        setLocation('/abastecimentos');
-      }, 1500);
+      console.log('Abastecimento salvo sem KM:', { 
+        station: selectedStation, 
+        fuelItems 
+      });
+      setLocation('/abastecimentos/resumo');
     }, 800);
   };
 
@@ -184,30 +176,7 @@ const KilometerageInputScreen = () => {
     return colors[fuelType] || 'bg-gray-100 text-gray-800';
   };
 
-  if (showSuccess) {
-    const consumption = getEstimatedConsumption();
-    
-    return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
-        <div className="bg-white rounded-2xl p-8 shadow-sm border border-gray-200 max-w-sm w-full text-center">
-          <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-            <Check className="w-8 h-8 text-green-600" />
-          </div>
-          <h2 className="text-xl font-semibold text-gray-900 mb-4">Abastecimento Registrado!</h2>
-          
-          <div className="space-y-2 mb-4 text-sm text-gray-600">
-            <p><span className="font-medium">{selectedStation.name}</span></p>
-            <p>{totalLiters.toFixed(1)} L • R$ {totalValue.toFixed(2).replace('.', ',')}</p>
-            <p>{fuelItems.length} combustível{fuelItems.length > 1 ? 'is' : ''}</p>
-            {km && <p>KM: {km}</p>}
-            {consumption && <p>Consumo estimado: {consumption} km/L</p>}
-          </div>
-          
-          <p className="text-sm text-gray-500">Dados salvos com sucesso</p>
-        </div>
-      </div>
-    );
-  }
+  
 
   return (
     <div className="min-h-screen bg-gray-50">

@@ -131,7 +131,7 @@ export default function MoreOptionsModal({
         </div>
 
         {/* Options Grid */}
-        <div className="p-6 grid grid-cols-2 gap-3" style={{ maxHeight: 'calc(70vh - 120px)', overflowY: 'auto' }}>
+        <div className="p-6 grid grid-cols-2 gap-3">
           {eventOptions.map((option) => (
             <button
               key={option.id}

@@ -6,12 +6,16 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import NotFound from "@/pages/not-found";
 import VehicleLedger from "@/pages/vehicle-ledger";
 import VehicleInsightsScreen from "@/pages/vehicle-insights";
+import FuelHistoryScreen from "@/pages/fuel-history";
+import GasStationSelection from "@/pages/gas-station-selection";
 
 function Router() {
   return (
     <Switch>
       <Route path="/" component={VehicleLedger} />
       <Route path="/monitor" component={VehicleInsightsScreen} />
+      <Route path="/abastecimentos" component={FuelHistoryScreen} />
+      <Route path="/abastecimentos/posto" component={GasStationSelection} />
       <Route component={NotFound} />
     </Switch>
   );

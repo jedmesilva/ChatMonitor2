@@ -271,7 +271,7 @@ const chatHistory = [
   },
   {
     id: 2,
-    type: 'kmonitor',
+    type: 'chatmonitor',
     content: 'Perfeito! Analisei seu abastecimento em detalhes. Seu consumo está excelente e você fez uma boa escolha de posto.',
     timestamp: '14:31',
     date: '2025-09-20',
@@ -290,7 +290,7 @@ const chatHistory = [
   },
   {
     id: 4,
-    type: 'kmonitor',
+    type: 'chatmonitor',
     content: 'Identifiquei os dados da sua foto! Quilometragem atual é 44.690 km, com boa autonomia restante.',
     timestamp: '09:16',
     date: '2025-09-20',
@@ -303,7 +303,7 @@ const chatHistory = [
   },
   {
     id: 5,
-    type: 'kmonitor',
+    type: 'chatmonitor',
     content: 'Alerta de preços na sua região! Encontrei oportunidades de economia.',
     timestamp: '19:20',
     date: '2025-09-19',
@@ -325,7 +325,7 @@ const chatHistory = [
   },
   {
     id: 7,
-    type: 'kmonitor',
+    type: 'chatmonitor',
     content: 'Seu consumo está muito bom! Veja os detalhes e tendências dos últimos meses:',
     timestamp: '10:31',
     date: '2025-09-19',
@@ -439,13 +439,13 @@ function ChatHistoryContent() {
                         <div className="flex items-center space-x-3">
                           {!isUser && (
                             <div className="w-7 h-7 bg-gray-800 rounded-xl flex items-center justify-center">
-                              <span className="text-sm font-bold text-white">K</span>
+                              <span className="text-sm font-bold text-white">C</span>
                             </div>
                           )}
                           <span className={`text-xs font-medium ${
                             isUser ? 'text-gray-300' : 'text-gray-500'
                           }`}>
-                            {isUser ? 'Você' : 'Kmonitor'}
+                            {isUser ? 'Você' : 'Chatmonitor'}
                           </span>
                         </div>
                         <span className={`text-xs ${

@@ -199,6 +199,47 @@ export default function VehicleLedger() {
     ? vehicleEvents 
     : vehicleEvents.filter(event => event.type === filterType);
 
+  // Function to format date for grouping
+  const formatDate = (dateStr: string) => {
+    const today = new Date();
+    const date = new Date(dateStr);
+    const diffTime = Math.abs(today.getTime() - date.getTime());
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+    if (diffDays === 1) return 'Hoje';
+    if (diffDays === 2) return 'Ontem';
+    if (diffDays <= 7) return `${diffDays - 1} dias atrás`;
+    
+    return date.toLocaleDateString('pt-BR', { day: '2-digit', month: 'short', year: 'numeric' });
+  };
+
+  // Group events by date
+  const groupedEvents: { [key: string]: typeof filteredEvents } = {};
+  filteredEvents.forEach(event => {
+    const dateKey = formatDate(event.created_at || event.date || new Date().toISOString());
+    if (!groupedEvents[dateKey]) {
+      groupedEvents[dateKey] = [];
+    }
+    groupedEvents[dateKey].push(event);
+  });
+
+  // Sort groups by date (oldest to newest for timeline effect)
+  const sortedGroupEntries = Object.entries(groupedEvents).sort(([dateA], [dateB]) => {
+    const getActualDate = (displayDate: string) => {
+      if (displayDate === 'Hoje') return new Date();
+      if (displayDate === 'Ontem') {
+        const yesterday = new Date();
+        yesterday.setDate(yesterday.getDate() - 1);
+        return yesterday;
+      }
+      // For other dates, find the original date from events
+      const event = filteredEvents.find(e => formatDate(e.created_at || e.date || new Date().toISOString()) === displayDate);
+      return event ? new Date(event.created_at || event.date || new Date()) : new Date();
+    };
+    
+    return getActualDate(dateA).getTime() - getActualDate(dateB).getTime();
+  });
+
   if (vehiclesLoading) {
     return (
       <div className="flex flex-col h-screen bg-gray-50">
@@ -312,14 +353,35 @@ export default function VehicleLedger() {
             </div>
           </div>
         ) : (
-          filteredEvents.map((event) => (
-            <VehicleEventCard
-              key={event.id}
-              event={event}
-              isExpanded={expandedEvents.has(event.id)}
-              onToggleExpand={() => toggleEventExpansion(event.id)}
-            />
-          ))
+          <div className="space-y-6">
+            {sortedGroupEntries.map(([dateGroup, events]) => (
+              <div key={dateGroup} className="space-y-4">
+                {/* Date Header */}
+                <div className="flex items-center gap-3 py-2">
+                  <div className="flex-1 h-px bg-gray-200"></div>
+                  <div className="flex items-center gap-2 px-3 py-1 bg-gray-100 rounded-full">
+                    <Calendar className="w-4 h-4 text-gray-500" />
+                    <span className="text-sm font-medium text-gray-700 uppercase tracking-wide">
+                      {dateGroup}
+                    </span>
+                  </div>
+                  <div className="flex-1 h-px bg-gray-200"></div>
+                </div>
+                
+                {/* Events for this date */}
+                <div className="space-y-4">
+                  {events.map((event) => (
+                    <VehicleEventCard
+                      key={event.id}
+                      event={event}
+                      isExpanded={expandedEvents.has(event.id)}
+                      onToggleExpand={() => toggleEventExpansion(event.id)}
+                    />
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
         )}
         
         <div ref={messagesEndRef} />

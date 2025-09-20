@@ -942,7 +942,8 @@ export default function VehicleLedger() {
               className="flex-1 overflow-y-auto bg-gray-50 min-h-0" 
               style={{ 
                 height: `calc(100vh - ${textareaHeight}px - 55px)`,
-                maxHeight: `calc(100vh - ${textareaHeight}px - 55px)`
+                maxHeight: `calc(100vh - ${textareaHeight}px - 55px)`,
+                paddingBottom: `${textareaHeight + 20}px`
               }}
             >
               <ChatHistoryContent />

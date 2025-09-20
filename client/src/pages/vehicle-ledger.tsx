@@ -565,6 +565,7 @@ export default function VehicleLedger() {
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const chatScrollRef = useRef<HTMLDivElement>(null);
+  const ledgerScrollRef = useRef<HTMLDivElement>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -588,10 +589,28 @@ export default function VehicleLedger() {
 
   // Auto-scroll to bottom when chat history changes or when chat monitor expands
   useEffect(() => {
-    if (isChatmonitorExpanded && messagesEndRef.current) {
-      messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
-    }
+    if (!isChatmonitorExpanded) return;
+    const el = chatScrollRef.current;
+    if (!el) return;
+    
+    const timeoutId = setTimeout(() => {
+      el.scrollTo({ top: el.scrollHeight, behavior: 'smooth' });
+    }, 100);
+    
+    return () => clearTimeout(timeoutId);
   }, [chatHistory, isChatmonitorExpanded]);
+
+  // Auto-scroll to bottom when vehicle events change
+  useEffect(() => {
+    const el = ledgerScrollRef.current;
+    if (!el) return;
+    
+    const timeoutId = setTimeout(() => {
+      el.scrollTo({ top: el.scrollHeight, behavior: 'smooth' });
+    }, 100);
+    
+    return () => clearTimeout(timeoutId);
+  }, [vehicleEvents, filterType, selectedVehicle]);
 
   const isMessageEmpty = !message.trim();
 
@@ -894,6 +913,7 @@ export default function VehicleLedger() {
 
       {/* Vehicle Events Timeline */}
       <div 
+        ref={ledgerScrollRef}
         className="flex-1 overflow-y-auto p-4 space-y-4"
         style={{ paddingBottom: `${calculateBottomPadding()}px` }}
         data-testid="events-timeline"
@@ -993,7 +1013,6 @@ export default function VehicleLedger() {
             >
               <div style={{ paddingBottom: `${textareaHeight + 60}px` }}>
                 <ChatHistoryContent chatHistory={chatHistory} />
-                <div ref={messagesEndRef} />
               </div>
             </div>
           )}

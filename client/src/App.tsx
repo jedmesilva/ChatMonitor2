@@ -7,17 +7,19 @@ import NotFound from "@/pages/not-found";
 import VehicleLedger from "@/pages/vehicle-ledger";
 import VehicleInsightsScreen from "@/pages/vehicle-insights";
 import FuelHistoryScreen from "@/pages/fuel-history";
-import GasStationSelection from "@/pages/gas-station-selection";
-import FuelEntry from "@/pages/fuel-entry";
+import GasStationSelectionScreen from "@/pages/gas-station-selection";
+import FuelEntryScreen from "./pages/fuel-entry";
+import KilometerageInputScreen from "./pages/kilometerage-input";
 
 function Router() {
   return (
     <Switch>
       <Route path="/" component={VehicleLedger} />
       <Route path="/monitor" component={VehicleInsightsScreen} />
+      <Route path="/abastecimentos/posto" component={GasStationSelectionScreen} />
+      <Route path="/abastecimentos/combustivel" component={FuelEntryScreen} />
+      <Route path="/abastecimentos/quilometragem" component={KilometerageInputScreen} />
       <Route path="/abastecimentos" component={FuelHistoryScreen} />
-      <Route path="/abastecimentos/posto" component={GasStationSelection} />
-      <Route path="/abastecimentos/registrar" component={FuelEntry} />
       <Route component={NotFound} />
     </Switch>
   );

@@ -257,8 +257,8 @@ const FuelInputScreen = () => {
   const handleContinue = () => {
     if (validateFuelStep()) {
       console.log('Continuar para próxima etapa com:', fuelItems);
-      // Navegar para próxima etapa
-      setLocation('/abastecimentos');
+      // Navegar para próxima etapa (quilometragem)
+      setLocation('/abastecimentos/quilometragem');
     }
   };
 

@@ -368,7 +368,7 @@ export default function VehicleLedger() {
               rows={1}
               data-testid="input-message"
             />
-          </div></div>
+          </div>
 
           {/* Action Buttons */}
           <div className="flex items-center justify-between">

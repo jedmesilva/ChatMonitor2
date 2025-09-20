@@ -296,10 +296,12 @@ export default function VehicleLedger() {
       {/* Chatmonitor Section */}
       {selectedItems > 0 && (
         <div 
-          className={`fixed left-0 right-0 bottom-0 z-40 transition-all duration-300 ${
-            isChatmonitorExpanded ? 'top-0 bg-white rounded-none' : 'bg-gray-800 rounded-t-3xl'
+          className={`fixed left-0 right-0 z-[60] transition-all duration-300 ${
+            isChatmonitorExpanded 
+              ? 'top-0 bottom-0 bg-white' 
+              : 'bottom-0 bg-gray-800 rounded-t-3xl'
           }`}
-          style={{ paddingBottom: `${textareaHeight}px` }}
+          style={isChatmonitorExpanded ? {} : { paddingBottom: `${textareaHeight}px` }}
         >
           {/* Header */}
           <div className={`bg-gray-800 text-white ${isChatmonitorExpanded ? 'rounded-none' : 'rounded-t-3xl'}`}>
@@ -323,12 +325,15 @@ export default function VehicleLedger() {
           {/* Expanded Content */}
           {isChatmonitorExpanded && (
             <div 
-              className="flex-1 overflow-y-auto bg-white" 
-              style={{ height: `calc(100vh - ${textareaHeight}px - 55px)` }}
+              className="flex-1 overflow-y-auto bg-white min-h-0" 
+              style={{ 
+                height: `calc(100vh - ${textareaHeight}px - 55px)`,
+                maxHeight: `calc(100vh - ${textareaHeight}px - 55px)`
+              }}
             >
-              <div className="max-w-4xl mx-auto">
-                <div className="px-4 pt-6">
-                  <div className="flex items-center justify-center h-64">
+              <div className="max-w-4xl mx-auto h-full">
+                <div className="px-4 pt-6 h-full">
+                  <div className="flex items-center justify-center min-h-[300px] h-full">
                     <div className="text-center">
                       <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
                         <Activity className="w-8 h-8 text-gray-400" />

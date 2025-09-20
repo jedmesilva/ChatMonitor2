@@ -672,6 +672,11 @@ export default function VehicleLedger() {
   const handleSendMessage = () => {
     if (!message.trim()) return;
     
+    // Auto-expand Chatmonitor if it's collapsed when user sends a message
+    if (!isChatmonitorExpanded) {
+      setIsChatmonitorExpanded(true);
+    }
+    
     // Create new user message
     const now = new Date();
     const newMessage = {

@@ -114,7 +114,7 @@ export default function MoreOptionsModal({
 
   return (
     <div className="fixed inset-0 bg-black/50 flex items-end justify-center z-50">
-      <div className="bg-white w-full max-w-md rounded-t-3xl shadow-xl animate-in slide-in-from-bottom-4 duration-300">
+      <div className="bg-white w-full rounded-t-3xl shadow-xl animate-in slide-in-from-bottom-4 duration-300">
         {/* Header */}
         <div className="flex items-center justify-between p-6 border-b border-gray-100">
           <div>
@@ -131,7 +131,7 @@ export default function MoreOptionsModal({
         </div>
 
         {/* Options Grid */}
-        <div className="p-6 grid grid-cols-2 gap-3 max-h-96 overflow-y-auto">
+        <div className="p-6 grid grid-cols-2 gap-3" style={{ maxHeight: 'calc(70vh - 120px)', overflowY: 'auto' }}>
           {eventOptions.map((option) => (
             <button
               key={option.id}

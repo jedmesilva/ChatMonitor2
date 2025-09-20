@@ -108,7 +108,7 @@ export default function VehicleEventCard({
   const cost = typeof event.cost === 'string' ? parseFloat(event.cost) : event.cost;
 
   return (
-    <div className={`border rounded-2xl p-5 mb-4 shadow-sm ${config.color}`}>
+    <div className={`border rounded-2xl p-4 mb-3 shadow-sm ${config.color}`}>
       {/* Header Section */}
       <div 
         className="flex items-start justify-between cursor-pointer"
@@ -117,43 +117,43 @@ export default function VehicleEventCard({
       >
         <div className="flex items-start gap-4 flex-1">
           {/* Icon */}
-          <div className={`rounded-xl p-3 ${config.iconBg} shadow-sm`}>
-            <IconComponent className={`w-6 h-6 ${config.iconColor}`} />
+          <div className={`rounded-lg p-2 ${config.iconBg} shadow-sm`}>
+            <IconComponent className={`w-4 h-4 ${config.iconColor}`} />
           </div>
           
           {/* Content */}
           <div className="flex-1 min-w-0">
             {/* Title and Location */}
             <div className="mb-2">
-              <h3 className="text-lg font-bold text-gray-900 mb-1" data-testid={`text-event-title-${event.id}`}>
+              <h3 className="text-sm font-semibold text-gray-900 mb-0.5" data-testid={`text-event-title-${event.id}`}>
                 {event.title}
               </h3>
-              <p className="text-sm text-gray-600" data-testid={`text-event-location-${event.id}`}>
+              <p className="text-xs text-gray-500" data-testid={`text-event-location-${event.id}`}>
                 {event.location || config.title}
               </p>
             </div>
             
             {/* Date and Time */}
-            <div className="flex items-center gap-2 mb-3">
-              <Calendar className="w-4 h-4 text-gray-500" />
-              <span className="text-sm font-medium text-gray-700" data-testid={`text-event-date-${event.id}`}>
+            <div className="flex items-center gap-2 mb-2">
+              <Calendar className="w-3 h-3 text-gray-400" />
+              <span className="text-xs font-medium text-gray-600" data-testid={`text-event-date-${event.id}`}>
                 {formatDate(event.date)}
               </span>
             </div>
             
             {/* Bottom Row - KM and Cost */}
             <div className="flex items-center justify-between">
-              <div className="flex items-center gap-2">
-                <MapPin className="w-4 h-4 text-gray-500" />
-                <span className="text-sm font-semibold text-gray-900" data-testid={`text-event-odometer-${event.id}`}>
+              <div className="flex items-center gap-1.5">
+                <MapPin className="w-3 h-3 text-gray-400" />
+                <span className="text-xs font-medium text-gray-700" data-testid={`text-event-odometer-${event.id}`}>
                   {event.odometer?.toLocaleString()} km
                 </span>
               </div>
               
               {cost > 0 && (
                 <div className="flex items-center gap-1">
-                  <DollarSign className="w-4 h-4 text-gray-500" />
-                  <span className="text-lg font-bold text-gray-900" data-testid={`text-event-cost-${event.id}`}>
+                  <DollarSign className="w-3 h-3 text-gray-400" />
+                  <span className="text-sm font-semibold text-gray-900" data-testid={`text-event-cost-${event.id}`}>
                     R$ {cost.toFixed(2)}
                   </span>
                 </div>
@@ -163,32 +163,32 @@ export default function VehicleEventCard({
         </div>
         
         {/* Expand Button */}
-        <button className="p-2 hover:bg-white/60 rounded-xl transition-colors ml-2 flex-shrink-0">
+        <button className="p-1.5 hover:bg-white/60 rounded-lg transition-colors ml-2 flex-shrink-0">
           {isExpanded ? (
-            <ChevronUp className="w-5 h-5 text-gray-600" />
+            <ChevronUp className="w-4 h-4 text-gray-500" />
           ) : (
-            <ChevronDown className="w-5 h-5 text-gray-600" />
+            <ChevronDown className="w-4 h-4 text-gray-500" />
           )}
         </button>
       </div>
       
       {/* Expanded Content */}
       {isExpanded && (
-        <div className="mt-5 pt-5 border-t border-gray-200/60" data-testid={`content-expanded-${event.id}`}>
-          <p className="text-gray-700 mb-4 leading-relaxed" data-testid={`text-event-description-${event.id}`}>
+        <div className="mt-4 pt-3 border-t border-gray-200/60" data-testid={`content-expanded-${event.id}`}>
+          <p className="text-sm text-gray-600 mb-3 leading-relaxed" data-testid={`text-event-description-${event.id}`}>
             {event.description || ''}
           </p>
           
           {event.details && typeof event.details === 'object' && event.details !== null && (
-            <div className="bg-white/60 rounded-xl p-4 mb-4">
-              <h4 className="text-sm font-semibold text-gray-900 mb-3 uppercase tracking-wide">Detalhes</h4>
-              <div className="space-y-3">
+            <div className="bg-white/60 rounded-lg p-3 mb-3">
+              <h4 className="text-xs font-semibold text-gray-700 mb-2 uppercase tracking-wide">Detalhes</h4>
+              <div className="space-y-2">
                 {Object.entries(event.details as Record<string, any>).map(([key, value]) => (
-                  <div key={key} className="flex items-center justify-between py-1">
-                    <span className="text-sm text-gray-600 capitalize font-medium">
+                  <div key={key} className="flex items-center justify-between py-0.5">
+                    <span className="text-xs text-gray-500 capitalize font-medium">
                       {key.replace('_', ' ')}
                     </span>
-                    <span className="text-sm font-semibold text-gray-900">{String(value)}</span>
+                    <span className="text-xs font-semibold text-gray-800">{String(value) as React.ReactNode}</span>
                   </div>
                 ))}
               </div>
@@ -202,7 +202,7 @@ export default function VehicleEventCard({
           )}
           
           {event.images && Array.isArray(event.images) && event.images.length > 0 && (
-            <div className="grid grid-cols-2 gap-3 mt-4">
+            <div className="grid grid-cols-2 gap-2 mt-3">
               {event.images.map((image, index) => (
                 <img 
                   key={index} 
@@ -215,12 +215,12 @@ export default function VehicleEventCard({
           )}
           
           {event.nextAction && (
-            <div className="mt-4 p-4 bg-white/60 rounded-xl border border-gray-200/60">
-              <div className="flex items-center gap-2 mb-2">
-                <Clock className="w-4 h-4 text-gray-500" />
-                <span className="text-sm font-semibold text-gray-700">Próxima ação</span>
+            <div className="mt-3 p-3 bg-white/60 rounded-lg border border-gray-200/60">
+              <div className="flex items-center gap-2 mb-1.5">
+                <Clock className="w-3 h-3 text-gray-400" />
+                <span className="text-xs font-semibold text-gray-700">Próxima ação</span>
               </div>
-              <p className="text-sm text-gray-600 leading-relaxed">{event.nextAction}</p>
+              <p className="text-xs text-gray-600 leading-relaxed">{event.nextAction}</p>
             </div>
           )}
         </div>

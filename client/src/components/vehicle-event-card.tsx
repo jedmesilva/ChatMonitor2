@@ -151,12 +151,9 @@ export default function VehicleEventCard({
               </div>
               
               {cost > 0 && (
-                <div className="flex items-center gap-1">
-                  <DollarSign className="w-3 h-3 text-gray-400" />
-                  <span className="text-sm font-semibold text-gray-900" data-testid={`text-event-cost-${event.id}`}>
-                    R$ {cost.toFixed(2)}
-                  </span>
-                </div>
+                <span className="text-sm font-semibold text-gray-900" data-testid={`text-event-cost-${event.id}`}>
+                  R$ {cost.toFixed(2)}
+                </span>
               )}
             </div>
           </div>
@@ -183,14 +180,17 @@ export default function VehicleEventCard({
             <div className="bg-white/60 rounded-lg p-3 mb-3">
               <h4 className="text-xs font-semibold text-gray-700 mb-2 uppercase tracking-wide">Detalhes</h4>
               <div className="space-y-2">
-                {Object.entries(event.details as Record<string, any>).map(([key, value]) => (
-                  <div key={key} className="flex items-center justify-between py-0.5">
-                    <span className="text-xs text-gray-500 capitalize font-medium">
-                      {key.replace('_', ' ')}
-                    </span>
-                    <span className="text-xs font-semibold text-gray-800">{String(value) as React.ReactNode}</span>
-                  </div>
-                ))}
+                {Object.entries(event.details as Record<string, any>).map(([key, value]) => {
+                  const displayValue = value != null ? String(value) : '-';
+                  return (
+                    <div key={key} className="flex items-center justify-between py-0.5">
+                      <span className="text-xs text-gray-500 capitalize font-medium">
+                        {key.replace('_', ' ')}
+                      </span>
+                      <span className="text-xs font-semibold text-gray-800">{displayValue}</span>
+                    </div>
+                  );
+                })}
               </div>
             </div>
           )}

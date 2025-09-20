@@ -53,10 +53,7 @@ export default function FuelAnalysisCard({
             <span className="text-xs font-semibold text-gray-800">{analysisResults.consumption} km/L</span>
           </div>
           <div className="flex items-center justify-between">
-            <div className="flex items-center gap-1.5">
-              <DollarSign className="w-3 h-3 text-gray-500" />
-              <span className="text-xs text-gray-600 font-medium">Preço/L</span>
-            </div>
+            <span className="text-xs text-gray-600 font-medium">Preço/L</span>
             <span className="text-xs font-semibold text-gray-800">R$ {analysisResults.cost}</span>
           </div>
         </div>

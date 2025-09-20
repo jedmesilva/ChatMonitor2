@@ -296,7 +296,7 @@ export default function VehicleLedger() {
       {/* Chatmonitor Section */}
       {selectedItems > 0 && (
         <div 
-          className={`fixed left-0 right-0 z-[60] transition-all duration-300 ${
+          className={`fixed left-0 right-0 z-40 transition-all duration-300 ${
             isChatmonitorExpanded 
               ? 'top-0 bottom-0 bg-white' 
               : 'bottom-0 bg-gray-800 rounded-t-3xl'

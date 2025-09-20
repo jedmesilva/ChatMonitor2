@@ -984,19 +984,22 @@ export default function VehicleLedger() {
         >
           {/* Header */}
           <div className={`bg-gray-800 text-white ${isChatmonitorExpanded ? 'rounded-none' : 'rounded-t-3xl'}`}>
-            <div className="max-w-4xl mx-auto px-4 py-3">
+            <div 
+              className="max-w-4xl mx-auto px-4 py-3 cursor-pointer hover:bg-gray-700 transition-colors duration-200"
+              onClick={toggleChatmonitorExpansion}
+              data-testid="chatmonitor-header"
+            >
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
                   <span className="text-sm font-medium">Chatmonitor</span>
                 </div>
 
-                <button 
-                  onClick={toggleChatmonitorExpansion}
-                  className="w-8 h-8 rounded-full bg-gray-700 hover:bg-gray-600 flex items-center justify-center transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50"
+                <div 
+                  className="w-8 h-8 rounded-full bg-gray-700 flex items-center justify-center"
                   data-testid="button-toggle-chatmonitor"
                 >
                   {isChatmonitorExpanded ? <ChevronDown size={16} /> : <ChevronUp size={16} />}
-                </button>
+                </div>
               </div>
             </div>
           </div>

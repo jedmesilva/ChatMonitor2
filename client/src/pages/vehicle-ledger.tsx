@@ -154,10 +154,22 @@ export default function VehicleLedger() {
   };
 
   const handleKeyPress = (e: React.KeyboardEvent) => {
-    if (e.key === 'Enter' && !e.shiftKey) {
+    if (e.key === 'Enter' && (e.ctrlKey || e.metaKey)) {
       e.preventDefault();
       handleSendMessage();
     }
+  };
+
+  // Auto-resize textarea
+  const handleTextareaChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setMessage(e.target.value);
+    
+    // Reset height to auto to get the correct scrollHeight
+    e.target.style.height = 'auto';
+    
+    // Set height based on scrollHeight, with min and max limits
+    const newHeight = Math.min(Math.max(e.target.scrollHeight, 24), 128); // min 24px, max 128px
+    e.target.style.height = newHeight + 'px';
   };
 
   const handleSelectMoreOption = (option: any) => {
@@ -380,11 +392,12 @@ export default function VehicleLedger() {
             <textarea
               ref={textareaRef}
               value={message}
-              onChange={(e) => setMessage(e.target.value)}
+              onChange={handleTextareaChange}
               onKeyDown={handleKeyPress}
-              placeholder="Adicionar evento, fazer pergunta..."
+              placeholder="Adicionar evento, fazer pergunta... (Ctrl+Enter para enviar)"
               className="w-full focus:outline-none focus:ring-0 text-gray-800 placeholder-gray-500 text-base border-none bg-transparent resize-none min-h-[1.5rem] max-h-32 overflow-y-auto"
               rows={1}
+              style={{ height: '24px' }}
               data-testid="input-message"
             />
           </div>

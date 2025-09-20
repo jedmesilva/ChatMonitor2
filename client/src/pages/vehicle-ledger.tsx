@@ -984,7 +984,7 @@ export default function VehicleLedger() {
         >
           {/* Header */}
           <div 
-            className={`bg-gray-800 text-white cursor-pointer hover:bg-gray-700 transition-colors duration-200 ${isChatmonitorExpanded ? 'rounded-none' : 'rounded-t-3xl'}`}
+            className={`bg-gray-800 text-white cursor-pointer transition-colors duration-200 ${isChatmonitorExpanded ? 'rounded-none' : 'rounded-t-3xl hover:bg-gray-700'}`}
             onClick={toggleChatmonitorExpansion}
             data-testid="chatmonitor-header"
           >

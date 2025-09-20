@@ -427,8 +427,8 @@ function ChatHistoryContent() {
                 const isUser = message.type === 'user';
 
                 return (
-                  <div key={message.id} className={`flex ${isUser ? 'justify-end' : 'justify-start'} mb-6`}>
-                    <div className={`max-w-[85%] rounded-2xl p-5 shadow-sm border ${
+                  <div key={message.id} className="mb-6">
+                    <div className={`w-full rounded-2xl p-5 shadow-sm border ${
                       isUser 
                         ? 'bg-gray-800 border-gray-700 text-white' 
                         : 'bg-white border-gray-200 text-gray-900'

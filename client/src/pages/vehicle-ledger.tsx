@@ -983,12 +983,12 @@ export default function VehicleLedger() {
           style={isChatmonitorExpanded ? {} : { paddingBottom: `${textareaHeight}px` }}
         >
           {/* Header */}
-          <div className={`bg-gray-800 text-white ${isChatmonitorExpanded ? 'rounded-none' : 'rounded-t-3xl'}`}>
-            <div 
-              className="max-w-4xl mx-auto px-4 py-3 cursor-pointer hover:bg-gray-700 transition-colors duration-200"
-              onClick={toggleChatmonitorExpansion}
-              data-testid="chatmonitor-header"
-            >
+          <div 
+            className={`bg-gray-800 text-white cursor-pointer hover:bg-gray-700 transition-colors duration-200 ${isChatmonitorExpanded ? 'rounded-none' : 'rounded-t-3xl'}`}
+            onClick={toggleChatmonitorExpansion}
+            data-testid="chatmonitor-header"
+          >
+            <div className="max-w-4xl mx-auto px-4 py-3">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
                   <span className="text-sm font-medium">Chatmonitor</span>

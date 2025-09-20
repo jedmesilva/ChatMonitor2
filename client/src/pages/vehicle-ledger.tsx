@@ -258,8 +258,8 @@ const InsightsCard = ({ insights = [], isAlert = false }) => {
   );
 };
 
-// Mock data baseado nas mensagens do chat original
-const chatHistory = [
+// Initial mock data for chat history
+const initialChatHistory = [
   {
     id: 1,
     type: 'user',
@@ -370,7 +370,7 @@ function getCategoryBg(category, isUser) {
   }
 }
 
-function ChatHistoryContent() {
+function ChatHistoryContent({ chatHistory }) {
   const formatDate = (dateStr) => {
     const today = new Date();
     const date = new Date(dateStr);
@@ -561,6 +561,7 @@ export default function VehicleLedger() {
   const [selectedItems] = useState(3);
   const [textareaHeight, setTextareaHeight] = useState(120); // Increased default to better match actual size
   const [chatmonitorHeaderHeight] = useState(55);
+  const [chatHistory, setChatHistory] = useState(initialChatHistory);
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
@@ -670,7 +671,38 @@ export default function VehicleLedger() {
 
   const handleSendMessage = () => {
     if (!message.trim()) return;
+    
+    // Create new user message
+    const now = new Date();
+    const newMessage = {
+      id: Date.now(), // Simple ID generation
+      type: 'user',
+      content: message.trim(),
+      timestamp: now.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' }),
+      date: now.toISOString().split('T')[0],
+      category: 'duvida' // Default category for user messages
+    };
+
+    // Add message to chat history
+    setChatHistory(prev => [...prev, newMessage]);
+    
+    // Clear input
     setMessage('');
+
+    // Simulate Chatmonitor response after a brief delay
+    setTimeout(() => {
+      const responseTime = new Date();
+      const chatmonitorResponse = {
+        id: Date.now() + 1,
+        type: 'chatmonitor',
+        content: 'Obrigado pela sua mensagem! Estou processando as informações...',
+        timestamp: responseTime.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' }),
+        date: responseTime.toISOString().split('T')[0],
+        category: 'resposta'
+      };
+
+      setChatHistory(prev => [...prev, chatmonitorResponse]);
+    }, 1000);
   };
 
   const handleKeyPress = (e: React.KeyboardEvent) => {
@@ -946,7 +978,7 @@ export default function VehicleLedger() {
               }}
             >
               <div style={{ paddingBottom: `${textareaHeight + 60}px` }}>
-                <ChatHistoryContent />
+                <ChatHistoryContent chatHistory={chatHistory} />
               </div>
             </div>
           )}

@@ -351,13 +351,12 @@ export default function VehicleLedger() {
 
       {/* Chat Input */}
       <div 
-        className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 rounded-t-3xl transition-all duration-300 z-[100] shadow-lg"
+        className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 rounded-t-3xl transition-all duration-300 z-50"
         ref={containerRef}
-        style={{ minHeight: '80px' }}
       >
         <div className="max-w-4xl mx-auto px-4 py-4">
           {/* Textarea */}
-          <div className="mb-4 border border-gray-200 rounded-lg p-3 bg-gray-50">
+          <div className="mb-4">
             <textarea
               ref={textareaRef}
               value={message}

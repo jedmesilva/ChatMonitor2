@@ -39,7 +39,7 @@ export default function VehicleLedger() {
   const [showMoreOptions, setShowMoreOptions] = useState(false);
   const [isChatmonitorExpanded, setIsChatmonitorExpanded] = useState(false);
   const [selectedItems] = useState(3);
-  const [textareaHeight, setTextareaHeight] = useState(78);
+  const [textareaHeight, setTextareaHeight] = useState(120); // Increased default to better match actual size
   const [chatmonitorHeaderHeight] = useState(55);
   
   const messagesEndRef = useRef<HTMLDivElement>(null);
@@ -82,8 +82,15 @@ export default function VehicleLedger() {
     }
   }, []);
 
+  // Force immediate height calculation on mount and layout changes
   useEffect(() => {
-    updateContainerHeight();
+    const calculateHeight = () => {
+      updateContainerHeight();
+      // Force another calculation after a brief delay to catch any layout changes
+      setTimeout(updateContainerHeight, 50);
+    };
+
+    calculateHeight();
 
     // Event listener to close vehicle selector when clicking outside
     const handleClickOutside = (event: MouseEvent) => {
@@ -103,8 +110,21 @@ export default function VehicleLedger() {
     };
 
     document.addEventListener('mousedown', handleClickOutside);
+
+    // ResizeObserver to watch for container size changes
+    let resizeObserver: ResizeObserver | undefined;
+    if (containerRef.current) {
+      resizeObserver = new ResizeObserver(() => {
+        updateContainerHeight();
+      });
+      resizeObserver.observe(containerRef.current);
+    }
+
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
+      if (resizeObserver) {
+        resizeObserver.disconnect();
+      }
     };
   }, [message, isChatmonitorExpanded, updateContainerHeight, showVehicleSelector]);
 

@@ -180,15 +180,13 @@ const GasStationSelection = () => {
   };
 
   const handleContinue = () => {
-    if (selectedStation) {
-      alert(`Continuando com ${selectedStation.name} - próxima etapa seria implementar a tela de detalhes do abastecimento`);
-    } else {
-      alert('Continuando sem posto selecionado - próxima etapa seria implementar a tela de detalhes do abastecimento');
-    }
+    // Navegar para a próxima etapa (registrar abastecimento)
+    setLocation('/abastecimentos/registrar');
   };
 
   const handleSkip = () => {
-    alert('Pulando seleção de posto - indo diretamente para detalhes do abastecimento');
+    // Navegar para a próxima etapa sem posto selecionado
+    setLocation('/abastecimentos/registrar');
   };
 
   return (

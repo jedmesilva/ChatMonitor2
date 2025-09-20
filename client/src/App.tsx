@@ -8,6 +8,7 @@ import VehicleLedger from "@/pages/vehicle-ledger";
 import VehicleInsightsScreen from "@/pages/vehicle-insights";
 import FuelHistoryScreen from "@/pages/fuel-history";
 import GasStationSelection from "@/pages/gas-station-selection";
+import FuelEntry from "@/pages/fuel-entry";
 
 function Router() {
   return (
@@ -16,6 +17,7 @@ function Router() {
       <Route path="/monitor" component={VehicleInsightsScreen} />
       <Route path="/abastecimentos" component={FuelHistoryScreen} />
       <Route path="/abastecimentos/posto" component={GasStationSelection} />
+      <Route path="/abastecimentos/registrar" component={FuelEntry} />
       <Route component={NotFound} />
     </Switch>
   );

@@ -456,7 +456,7 @@ const KilometerageInputScreen = () => {
               disabled={isProcessing}
               className={`w-full py-4 rounded-2xl font-semibold transition-all duration-200 ${
                 !isProcessing
-                  ? 'bg-blue-600 text-white active:scale-95 hover:bg-blue-700'
+                  ? 'bg-primary text-primary-foreground active:scale-95 hover:bg-primary/90'
                   : 'bg-gray-100 text-gray-400 cursor-not-allowed'
               }`}
             >

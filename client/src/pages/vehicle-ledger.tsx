@@ -933,7 +933,7 @@ export default function VehicleLedger() {
       <div 
         ref={ledgerScrollRef}
         className="flex-1 overflow-y-auto p-4 space-y-4"
-        style={{ paddingBottom: `${calculateBottomPadding()}px` }}
+        style={{ paddingBottom: `${calculateBottomPadding() + 24}px` }}
         data-testid="events-timeline"
       >
         {eventsLoading ? (

@@ -113,8 +113,8 @@ export default function MoreOptionsModal({
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-black/50 flex items-end justify-center z-50">
-      <div className="bg-white w-full max-w-md rounded-t-3xl shadow-xl animate-in slide-in-from-bottom-4 duration-300">
+    <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+      <div className="bg-white w-full max-w-4xl max-h-[90vh] rounded-3xl shadow-xl animate-in slide-in-from-bottom-4 duration-300 flex flex-col">
         {/* Header */}
         <div className="flex items-center justify-between p-6 border-b border-gray-100">
           <div>
@@ -131,7 +131,7 @@ export default function MoreOptionsModal({
         </div>
 
         {/* Options Grid */}
-        <div className="p-6 grid grid-cols-2 gap-3 max-h-96 overflow-y-auto">
+        <div className="p-6 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 flex-1 overflow-y-auto">
           {eventOptions.map((option) => (
             <button
               key={option.id}
@@ -149,7 +149,7 @@ export default function MoreOptionsModal({
         </div>
 
         {/* Quick Actions */}
-        <div className="p-6 pt-0">
+        <div className="p-6 pt-0 flex-shrink-0">
           <div className="flex gap-2">
             <button 
               onClick={() => handleSelectOption({ id: 'photo_ai', icon: Camera, label: 'Foto + IA', description: '' })}

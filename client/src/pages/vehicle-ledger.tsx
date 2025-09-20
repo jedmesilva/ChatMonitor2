@@ -394,7 +394,7 @@ export default function VehicleLedger() {
               value={message}
               onChange={handleTextareaChange}
               onKeyDown={handleKeyPress}
-              placeholder="Adicionar evento, fazer pergunta... (Ctrl+Enter para enviar)"
+              placeholder="Adicionar evento, fazer pergunta..."
               className="w-full focus:outline-none focus:ring-0 text-gray-800 placeholder-gray-500 text-base border-none bg-transparent resize-none min-h-[1.5rem] max-h-32 overflow-y-auto"
               rows={1}
               style={{ height: '24px' }}

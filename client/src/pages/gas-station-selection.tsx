@@ -293,7 +293,7 @@ const GasStationSelection = () => {
                 onChange={(e) => setStationSearch(e.target.value)}
                 onFocus={() => setShowStationSearch(true)}
                 placeholder="Buscar posto por nome ou localização"
-                className="w-full px-3 py-3 border border-gray-200 rounded-xl focus:border-gray-800 focus:outline-none"
+                className="w-full pl-10 pr-10 py-3 border border-gray-200 rounded-xl focus:border-gray-800 focus:outline-none"
               />
               {stationSearch && (
                 <button

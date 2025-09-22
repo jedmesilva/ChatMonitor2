@@ -235,10 +235,10 @@ const GasStationSelection = () => {
         {/* Posto selecionado */}
         {selectedStation && (
           <div className="bg-white rounded-2xl border border-gray-200 overflow-hidden">
-            <div className="p-4 border-b border-gray-100 bg-gray-50">
+            <div className="p-4 border-b border-gray-100 bg-green-50">
               <div className="flex items-center gap-2">
-                <Check className="w-4 h-4 text-gray-800" />
-                <span className="text-sm font-semibold text-gray-900">Posto Selecionado</span>
+                <Check className="w-4 h-4 text-green-600" />
+                <span className="text-sm font-semibold text-green-900">Posto Selecionado</span>
               </div>
             </div>
 

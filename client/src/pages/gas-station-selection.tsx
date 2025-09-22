@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useLocation } from 'wouter';
 import { 
   ArrowLeft, 
@@ -21,6 +21,24 @@ const GasStationSelection = () => {
     name: '',
     address: ''
   });
+  const searchContainerRef = useRef<HTMLDivElement>(null);
+
+  // Detectar cliques fora do componente de busca
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (searchContainerRef.current && !searchContainerRef.current.contains(event.target as Node)) {
+        setShowStationSearch(false);
+      }
+    };
+
+    if (showStationSearch) {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [showStationSearch]);
 
   // Dados do veículo atual
   const currentVehicle = {
@@ -281,7 +299,7 @@ const GasStationSelection = () => {
         )}
 
         {/* Busca de posto */}
-        <div className="bg-white rounded-2xl border border-gray-200 overflow-hidden">
+        <div ref={searchContainerRef} className="bg-white rounded-2xl border border-gray-200 overflow-hidden">
           <div className="p-4">
             <div className="relative">
               <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -292,10 +310,6 @@ const GasStationSelection = () => {
                 value={stationSearch}
                 onChange={(e) => setStationSearch(e.target.value)}
                 onFocus={() => setShowStationSearch(true)}
-                onBlur={() => {
-                  // Pequeno delay para permitir cliques nos resultados
-                  setTimeout(() => setShowStationSearch(false), 150);
-                }}
                 placeholder="Buscar posto por nome ou localização"
                 className="w-full pl-10 pr-10 py-3 border border-gray-200 rounded-xl focus:border-gray-800 focus:outline-none"
               />

@@ -124,7 +124,7 @@ const GasStationSelection = () => {
   const filteredStations = () => {
     const allStations = [...savedStations, ...nearbyStations];
     if (!stationSearch.trim()) return allStations;
-    
+
     return allStations.filter((station: any) => 
       station.name.toLowerCase().includes(stationSearch.toLowerCase()) ||
       station.brand.toLowerCase().includes(stationSearch.toLowerCase()) ||
@@ -155,7 +155,7 @@ const GasStationSelection = () => {
       alert('Por favor, informe o nome do posto');
       return;
     }
-    
+
     const newStation = {
       id: Date.now(), // ID temporário
       name: newStationForm.name.trim(),
@@ -166,7 +166,7 @@ const GasStationSelection = () => {
       isUserAdded: true,
       prices: {}
     };
-    
+
     setSelectedStation(newStation);
     setNewStationForm({ name: '', address: '' });
     setShowAddStation(false);
@@ -205,7 +205,7 @@ const GasStationSelection = () => {
             <p className="text-sm text-gray-500">{currentVehicle.name} • {currentVehicle.plate}</p>
           </div>
           <div className="flex items-center gap-2">
-            <div className="w-2 h-2 rounded-full bg-blue-600"></div>
+            <div className="w-2 h-2 rounded-full bg-green-600"></div>
             <div className="w-2 h-2 rounded-full bg-gray-300"></div>
             <div className="w-2 h-2 rounded-full bg-gray-300"></div>
             <span className="text-xs text-gray-500 ml-1">1/3</span>
@@ -223,7 +223,7 @@ const GasStationSelection = () => {
                 <span className="text-sm font-semibold text-green-900">Posto Selecionado</span>
               </div>
             </div>
-            
+
             <div className="p-4">
               <div className="flex items-start justify-between">
                 <div className="flex-1">
@@ -246,7 +246,7 @@ const GasStationSelection = () => {
                       </div>
                     )}
                   </div>
-                  
+
                   {/* Preços disponíveis */}
                   {selectedStation.prices && (
                     <div className="mt-3 p-3 bg-gray-50 rounded-xl">
@@ -268,7 +268,7 @@ const GasStationSelection = () => {
                     </div>
                   )}
                 </div>
-                
+
                 <button
                   onClick={() => setSelectedStation(null)}
                   className="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center"
@@ -293,7 +293,7 @@ const GasStationSelection = () => {
                 onChange={(e) => setStationSearch(e.target.value)}
                 onFocus={() => setShowStationSearch(true)}
                 placeholder="Buscar posto por nome ou localização"
-                className="w-full pl-10 pr-10 py-3 border border-gray-200 rounded-xl focus:border-blue-500 focus:outline-none"
+                className="w-full px-3 py-3 border border-gray-200 rounded-xl focus:border-green-500 focus:outline-none"
               />
               {stationSearch && (
                 <button
@@ -304,7 +304,7 @@ const GasStationSelection = () => {
                 </button>
               )}
             </div>
-            
+
             {showStationSearch && (
               <div className="mt-4 space-y-3 max-h-64 overflow-y-auto">
                 {filteredStations().slice(0, 8).map((station) => (
@@ -345,7 +345,7 @@ const GasStationSelection = () => {
                     </div>
                   </button>
                 ))}
-                
+
                 {filteredStations().length === 0 && (
                   <div className="text-center py-6">
                     <div className="text-gray-500 mb-4">
@@ -354,7 +354,7 @@ const GasStationSelection = () => {
                     </div>
                     <button
                       onClick={handleAddStation}
-                      className="inline-flex items-center gap-2 px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700 transition-colors"
+                      className="inline-flex items-center gap-2 px-4 py-2 bg-green-600 text-white text-sm font-medium rounded-lg hover:bg-green-700 transition-colors"
                     >
                       <Plus className="w-4 h-4" />
                       Adicionar Posto Manualmente
@@ -369,13 +369,13 @@ const GasStationSelection = () => {
         {/* Formulário para adicionar novo posto */}
         {showAddStation && (
           <div className="bg-white rounded-2xl border border-gray-200 overflow-hidden">
-            <div className="p-4 border-b border-gray-100 bg-blue-50">
+            <div className="p-4 border-b border-gray-100 bg-green-50">
               <div className="flex items-center gap-2">
-                <Plus className="w-4 h-4 text-blue-600" />
-                <span className="text-sm font-semibold text-blue-900">Adicionar Novo Posto</span>
+                <Plus className="w-4 h-4 text-green-600" />
+                <span className="text-sm font-semibold text-green-900">Adicionar Novo Posto</span>
               </div>
             </div>
-            
+
             <div className="p-4 space-y-4">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -386,13 +386,13 @@ const GasStationSelection = () => {
                   value={newStationForm.name}
                   onChange={(e) => setNewStationForm(prev => ({ ...prev, name: e.target.value }))}
                   placeholder="Ex: Shell da Esquina, Posto do João, etc."
-                  className="w-full px-3 py-3 border border-gray-200 rounded-xl focus:border-blue-500 focus:outline-none"
+                  className="w-full px-3 py-3 border border-gray-200 rounded-xl focus:border-green-500 focus:outline-none"
                 />
                 <p className="text-xs text-gray-500 mt-1">
                   Pode ser o nome oficial ou um apelido que você usa
                 </p>
               </div>
-              
+
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
                   Endereço ou Referência
@@ -402,17 +402,17 @@ const GasStationSelection = () => {
                   value={newStationForm.address}
                   onChange={(e) => setNewStationForm(prev => ({ ...prev, address: e.target.value }))}
                   placeholder="Ex: Av. Paulista, 1000 ou próximo ao shopping"
-                  className="w-full px-3 py-3 border border-gray-200 rounded-xl focus:border-blue-500 focus:outline-none"
+                  className="w-full px-3 py-3 border border-gray-200 rounded-xl focus:border-green-500 focus:outline-none"
                 />
                 <p className="text-xs text-gray-500 mt-1">
                   Endereço completo ou uma referência que te ajude a lembrar
                 </p>
               </div>
-              
+
               <div className="flex gap-3 pt-2">
                 <button
                   onClick={handleSaveNewStation}
-                  className="flex-1 py-3 bg-blue-600 text-white font-medium rounded-xl hover:bg-blue-700 transition-colors"
+                  className="flex-1 py-3 bg-green-600 text-white font-medium rounded-xl hover:bg-green-700 transition-colors"
                 >
                   Adicionar Posto
                 </button>
@@ -438,7 +438,7 @@ const GasStationSelection = () => {
                   <h3 className="font-semibold text-gray-900">Postos Favoritos</h3>
                 </div>
               </div>
-              
+
               <div className="divide-y divide-gray-100">
                 {savedStations.filter(station => station.isFavorite).map((station) => (
                   <button
@@ -485,7 +485,7 @@ const GasStationSelection = () => {
                   <h3 className="font-semibold text-gray-900">Postos Recentes</h3>
                 </div>
               </div>
-              
+
               <div className="divide-y divide-gray-100">
                 {savedStations.filter(station => !station.isFavorite).map((station) => (
                   <button
@@ -527,11 +527,11 @@ const GasStationSelection = () => {
             <div className="bg-white rounded-2xl border border-gray-200 overflow-hidden">
               <div className="p-4 border-b border-gray-100 bg-gray-50">
                 <div className="flex items-center gap-2">
-                  <MapPin className="w-4 h-4 text-blue-600" />
+                  <MapPin className="w-4 h-4 text-green-600" />
                   <h3 className="font-semibold text-gray-900">Postos Próximos</h3>
                 </div>
               </div>
-              
+
               <div className="divide-y divide-gray-100">
                 {nearbyStations.map((station) => (
                   <button
@@ -550,7 +550,7 @@ const GasStationSelection = () => {
                         </div>
                         <div className="flex items-center justify-between">
                           <div className="flex items-center gap-3 text-xs">
-                            <span className="text-blue-600 font-medium">{station.distance}</span>
+                            <span className="text-green-600 font-medium">{station.distance}</span>
                           </div>
                           {station.prices && station.prices.gasolina_comum && (
                             <div className="text-xs text-green-600 font-medium">
@@ -575,7 +575,7 @@ const GasStationSelection = () => {
             // Se tem posto selecionado, mostra apenas o botão de continuar com o posto
             <button
               onClick={handleContinue}
-              className="w-full py-4 rounded-2xl font-semibold bg-blue-600 text-white active:scale-95 hover:bg-blue-700 transition-all duration-200"
+              className="w-full py-4 rounded-2xl font-semibold bg-green-600 text-white active:scale-95 hover:bg-green-700 transition-all duration-200"
             >
               Continuar com {selectedStation.name}
             </button>

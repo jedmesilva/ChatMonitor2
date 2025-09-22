@@ -349,16 +349,16 @@ const FuelInputScreen = () => {
                       <div className="text-xs font-medium text-gray-700 mb-2">Preços de referência do posto:</div>
                       <div className="grid grid-cols-2 gap-2 text-xs">
                         {selectedStation.prices.gasolina_comum && (
-                          <div>Comum: <span className="font-medium text-green-600">R$ {selectedStation.prices.gasolina_comum}</span></div>
+                          <div>Comum: <span className="font-medium text-gray-800">R$ {selectedStation.prices.gasolina_comum}</span></div>
                         )}
                         {selectedStation.prices.gasolina_aditivada && (
-                          <div>Aditivada: <span className="font-medium text-green-600">R$ {selectedStation.prices.gasolina_aditivada}</span></div>
+                          <div>Aditivada: <span className="font-medium text-gray-800">R$ {selectedStation.prices.gasolina_aditivada}</span></div>
                         )}
                         {selectedStation.prices.etanol && (
-                          <div>Etanol: <span className="font-medium text-green-600">R$ {selectedStation.prices.etanol}</span></div>
+                          <div>Etanol: <span className="font-medium text-gray-800">R$ {selectedStation.prices.etanol}</span></div>
                         )}
                         {selectedStation.prices.diesel && (
-                          <div>Diesel: <span className="font-medium text-green-600">R$ {selectedStation.prices.diesel}</span></div>
+                          <div>Diesel: <span className="font-medium text-gray-800">R$ {selectedStation.prices.diesel}</span></div>
                         )}
                       </div>
                     </div>
@@ -367,7 +367,7 @@ const FuelInputScreen = () => {
 
                 <button
                   onClick={() => setLocation('/abastecimentos/posto')}
-                  className="text-blue-600 text-sm font-medium"
+                  className="text-gray-800 text-sm font-medium"
                 >
                   Alterar
                 </button>
@@ -389,7 +389,7 @@ const FuelInputScreen = () => {
               </p>
               <button
                 onClick={() => setLocation('/abastecimentos/posto')}
-                className="text-blue-600 text-sm font-medium"
+                className="text-gray-800 text-sm font-medium"
               >
                 Selecionar posto agora
               </button>
@@ -417,7 +417,7 @@ const FuelInputScreen = () => {
                           {item.fuelType}
                         </span>
                         <span className="text-sm font-semibold text-gray-900">{item.liters} L</span>
-                        <span className="text-xs font-medium text-blue-600 bg-blue-50 px-2 py-1 rounded-full">
+                        <span className="text-xs font-medium text-gray-800 bg-gray-100 px-2 py-1 rounded-full">
                           {percentage}%
                         </span>
                       </div>
@@ -430,7 +430,7 @@ const FuelInputScreen = () => {
                     <div className="flex items-center gap-2">
                       <button
                         onClick={() => editFuelItem(index)}
-                        className="text-blue-600 text-sm font-medium"
+                        className="text-gray-800 text-sm font-medium"
                       >
                         Editar
                       </button>
@@ -446,12 +446,12 @@ const FuelInputScreen = () => {
               })}
 
               {/* Totais */}
-              <div className="p-4 bg-blue-50">
+              <div className="p-4 bg-gray-50">
                 <div className="flex justify-between items-center">
-                  <span className="font-semibold text-blue-900">Total Geral</span>
+                  <span className="font-semibold text-gray-900">Total Geral</span>
                   <div className="text-right">
-                    <div className="font-bold text-blue-900">{totalLiters.toFixed(1)} L</div>
-                    <div className="text-sm text-blue-700">R$ {totalValue.toFixed(2).replace('.', ',')}</div>
+                    <div className="font-bold text-gray-900">{totalLiters.toFixed(1)} L</div>
+                    <div className="text-sm text-gray-700">R$ {totalValue.toFixed(2).replace('.', ',')}</div>
                   </div>
                 </div>
               </div>
@@ -550,9 +550,9 @@ const FuelInputScreen = () => {
 
             {/* Valores calculados */}
             {getCalculatedValues() && (
-              <div className="p-3 bg-blue-50 rounded-xl">
-                <div className="text-sm text-blue-600 mb-1">Valor calculado:</div>
-                <div className="text-sm font-medium text-blue-900">
+              <div className="p-3 bg-gray-50 rounded-xl">
+                <div className="text-sm text-gray-600 mb-1">Valor calculado:</div>
+                <div className="text-sm font-medium text-gray-900">
                   {getCalculatedValues()}
                 </div>
               </div>
@@ -564,7 +564,7 @@ const FuelInputScreen = () => {
               disabled={!canAddItem()}
               className={`w-full py-3 rounded-xl font-medium flex items-center justify-center gap-2 ${
                 canAddItem()
-                  ? 'bg-blue-600 text-white hover:bg-blue-700'
+                  ? 'bg-gray-800 text-white hover:bg-gray-700'
                   : 'bg-gray-100 text-gray-400 cursor-not-allowed'
               }`}
             >
@@ -646,7 +646,7 @@ const FuelInputScreen = () => {
         {isProcessing && (
           <div className="bg-white rounded-2xl p-6 border border-gray-200">
             <div className="flex items-center justify-center gap-3">
-              <div className="animate-spin w-5 h-5 border-2 border-blue-500 border-t-transparent rounded-full" />
+              <div className="animate-spin w-5 h-5 border-2 border-gray-800 border-t-transparent rounded-full" />
               <span className="text-gray-600">Detectando valores...</span>
             </div>
           </div>
@@ -669,7 +669,7 @@ const FuelInputScreen = () => {
           disabled={fuelItems.length === 0 || isProcessing}
           className={`w-full py-4 rounded-2xl font-semibold transition-all duration-200 ${
             fuelItems.length > 0 && !isProcessing
-              ? 'bg-blue-600 text-white active:scale-95 hover:bg-blue-700'
+              ? 'bg-gray-800 text-white active:scale-95 hover:bg-gray-700'
               : 'bg-gray-100 text-gray-400 cursor-not-allowed'
           }`}
         >

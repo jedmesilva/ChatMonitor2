@@ -110,7 +110,7 @@ const FuelSummaryScreen = () => {
   const getChangeColor = (value, invert = false) => {
     if (value > 0) return invert ? 'text-red-600' : 'text-green-600';
     if (value < 0) return invert ? 'text-green-600' : 'text-red-600';
-    return 'text-gray-500';
+    return 'text-gray-600';
   };
 
   const formatCurrency = (value) => `R$ ${value.toFixed(2).replace('.', ',')}`;
@@ -124,7 +124,7 @@ const FuelSummaryScreen = () => {
             className="w-10 h-10 rounded-xl bg-gray-100 flex items-center justify-center"
             onClick={goBack}
           >
-            <ArrowLeft className="w-5 h-5 text-gray-500" />
+            <ArrowLeft className="w-5 h-5 text-gray-600" />
           </button>
           <div className="flex-1">
             <h1 className="text-lg font-semibold text-gray-900">Resumo do Abastecimento</h1>
@@ -139,7 +139,7 @@ const FuelSummaryScreen = () => {
       <div className="p-4 space-y-6 pb-32">
         {/* Resumo Principal */}
         <div className="bg-white rounded-2xl border border-gray-200 overflow-hidden">
-          <div className="p-4 border-b border-gray-100 status-fuel">
+          <div className="p-4 border-b border-gray-100 bg-blue-50">
             <div className="flex items-center gap-2">
               <Fuel className="w-4 h-4 text-blue-600" />
               <span className="text-sm font-semibold text-blue-900">Abastecimento Registrado</span>
@@ -183,7 +183,7 @@ const FuelSummaryScreen = () => {
 
         {/* Análise de Consumo */}
         <div className="bg-white rounded-2xl border border-gray-200 overflow-hidden">
-          <div className="p-4 border-b border-gray-100 status-analysis">
+          <div className="p-4 border-b border-gray-100 bg-green-50">
             <div className="flex items-center gap-2">
               <Activity className="w-4 h-4 text-green-600" />
               <span className="text-sm font-semibold text-green-900">Análise de Consumo</span>
@@ -207,8 +207,8 @@ const FuelSummaryScreen = () => {
             </div>
 
             <div className={`p-4 rounded-xl ${
-              consumptionStatus.color === 'green' ? 'status-analysis border border-green-100' :
-              consumptionStatus.color === 'blue' ? 'status-fuel border border-blue-100' :
+              consumptionStatus.color === 'green' ? 'bg-green-50 border border-green-100' :
+              consumptionStatus.color === 'blue' ? 'bg-blue-50 border border-blue-100' :
               consumptionStatus.color === 'yellow' ? 'bg-yellow-50 border border-yellow-100' :
               'bg-red-50 border border-red-100'
             }`}>
@@ -315,7 +315,7 @@ const FuelSummaryScreen = () => {
             </div>
             
             {currentFueling.station.name !== previousFueling.station.name && (
-              <div className="mt-3 p-3 status-fuel rounded-lg">
+              <div className="mt-3 p-3 bg-blue-50 rounded-lg">
                 <div className="text-xs text-blue-700">
                   Você mudou de posto. Isso pode explicar a diferença no preço do combustível.
                 </div>
@@ -396,21 +396,21 @@ const FuelSummaryScreen = () => {
               <h4 className="text-base font-semibold text-gray-900 mb-4">Abastecimento Atual</h4>
               <div className="space-y-3 text-sm">
                 <div className="flex justify-between">
-                  <span className="text-gray-500">Data:</span>
+                  <span className="text-gray-600">Data:</span>
                   <span className="font-medium">{new Date(currentFueling.date).toLocaleDateString('pt-BR')}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-gray-500">KM:</span>
+                  <span className="text-gray-600">KM:</span>
                   <span className="font-medium">{currentFueling.km.toLocaleString('pt-BR')} km</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-gray-500">Posto:</span>
+                  <span className="text-gray-600">Posto:</span>
                   <span className="font-medium">{currentFueling.station.name}</span>
                 </div>
                 {currentFueling.fuels.map((fuel, index) => (
                   <div key={index} className="border-t border-gray-100 pt-2">
                     <div className="flex justify-between items-center">
-                      <span className="text-gray-500">{fuel.type}:</span>
+                      <span className="text-gray-600">{fuel.type}:</span>
                       <span className="font-medium">{fuel.liters}L • {formatCurrency(fuel.pricePerLiter)}/L</span>
                     </div>
                   </div>
@@ -421,7 +421,7 @@ const FuelSummaryScreen = () => {
             {/* Detalhes do Abastecimento Anterior */}
             <div className="bg-white rounded-2xl border border-gray-200 p-5">
               <h4 className="text-base font-semibold text-gray-900 mb-4">Abastecimento Anterior</h4>
-              <div className="space-y-3 text-sm text-gray-500">
+              <div className="space-y-3 text-sm text-gray-600">
                 <div className="flex justify-between">
                   <span>Data:</span>
                   <span>{new Date(previousFueling.date).toLocaleDateString('pt-BR')}</span>

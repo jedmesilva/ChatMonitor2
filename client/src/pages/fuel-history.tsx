@@ -293,8 +293,8 @@ const FuelHistoryScreen = () => {
           <div className="p-4">
             <div className="grid grid-cols-2 gap-4 mb-4">
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center">
-                  <OdometerIcon size={20} className="text-blue-600" />
+                <div className="w-10 h-10 bg-gray-100 rounded-lg flex items-center justify-center">
+                  <OdometerIcon size={20} className="text-gray-600" />
                 </div>
                 <div>
                   <div className="text-lg font-bold text-gray-900">
@@ -305,8 +305,8 @@ const FuelHistoryScreen = () => {
               </div>
               
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center">
-                  <FuelTankIcon size={20} className="text-green-600" level={currentVehicle.fuelLevel / 100} />
+                <div className="w-10 h-10 bg-gray-100 rounded-lg flex items-center justify-center">
+                  <FuelTankIcon size={20} className="text-gray-600" level={currentVehicle.fuelLevel / 100} />
                 </div>
                 <div>
                   <div className="text-lg font-bold text-gray-900">{currentVehicle.fuelLevel}%</div>
@@ -315,12 +315,12 @@ const FuelHistoryScreen = () => {
               </div>
             </div>
             
-            <div className="p-3 bg-blue-50 rounded-xl border border-blue-100">
+            <div className="p-3 bg-gray-50 rounded-xl border border-gray-100">
               <div className="flex items-center gap-2 mb-1">
-                <AlertCircle className="w-4 h-4 text-blue-600" />
-                <span className="text-sm font-medium text-blue-900">Autonomia atual</span>
+                <AlertCircle className="w-4 h-4 text-gray-600" />
+                <span className="text-sm font-medium text-gray-900">Autonomia atual</span>
               </div>
-              <p className="text-sm text-blue-700">
+              <p className="text-sm text-gray-700">
                 Aproximadamente {currentVehicle.autonomy} km restantes
               </p>
             </div>
@@ -411,7 +411,7 @@ const FuelHistoryScreen = () => {
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   placeholder="Buscar por posto, data ou valor..."
-                  className="w-full pl-10 pr-4 py-3 border border-gray-200 rounded-xl focus:border-blue-500 focus:outline-none"
+                  className="w-full pl-10 pr-4 py-3 border border-gray-200 rounded-xl focus:border-gray-500 focus:outline-none"
                 />
               </div>
             </div>
@@ -515,8 +515,8 @@ const FuelHistoryScreen = () => {
                 
                 {/* Indicador de distância percorrida */}
                 {fueling.kmTraveled && (
-                  <div className="mt-3 p-2 bg-blue-50 rounded-lg">
-                    <div className="flex items-center gap-2 text-xs text-blue-700">
+                  <div className="mt-3 p-2 bg-gray-50 rounded-lg">
+                    <div className="flex items-center gap-2 text-xs text-gray-700">
                       <Activity className="w-3 h-3" />
                       <span>
                         {fueling.kmTraveled} km desde o último abastecimento
@@ -531,15 +531,15 @@ const FuelHistoryScreen = () => {
         </div>
 
         {/* Call to Action para mais dados */}
-        <div className="bg-gradient-to-br from-blue-50 to-indigo-50 border border-blue-200 rounded-2xl p-6 text-center">
-          <div className="w-12 h-12 bg-blue-600 rounded-xl flex items-center justify-center mx-auto mb-3">
+        <div className="bg-gradient-to-br from-gray-50 to-gray-100 border border-gray-200 rounded-2xl p-6 text-center">
+          <div className="w-12 h-12 bg-gray-800 rounded-xl flex items-center justify-center mx-auto mb-3">
             <Activity className="w-6 h-6 text-white" />
           </div>
-          <h3 className="text-base font-semibold text-blue-900 mb-2">Análises Detalhadas</h3>
-          <p className="text-sm text-blue-700 mb-4">
+          <h3 className="text-base font-semibold text-gray-900 mb-2">Análises Detalhadas</h3>
+          <p className="text-sm text-gray-700 mb-4">
             Acesse gráficos e relatórios completos do seu histórico de combustível
           </p>
-          <button className="px-4 py-2 bg-blue-600 text-white rounded-lg text-sm font-medium hover:bg-blue-700 transition-colors">
+          <button className="px-4 py-2 bg-gray-800 text-white rounded-lg text-sm font-medium hover:bg-gray-700 transition-colors">
             Ver Relatórios
           </button>
         </div>

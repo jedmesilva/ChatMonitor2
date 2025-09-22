@@ -292,6 +292,10 @@ const GasStationSelection = () => {
                 value={stationSearch}
                 onChange={(e) => setStationSearch(e.target.value)}
                 onFocus={() => setShowStationSearch(true)}
+                onBlur={() => {
+                  // Pequeno delay para permitir cliques nos resultados
+                  setTimeout(() => setShowStationSearch(false), 150);
+                }}
                 placeholder="Buscar posto por nome ou localização"
                 className="w-full pl-10 pr-10 py-3 border border-gray-200 rounded-xl focus:border-gray-800 focus:outline-none"
               />

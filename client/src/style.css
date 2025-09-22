@@ -1,199 +1,177 @@
 /* Vehicle Ledger - Sistema de Design Padronizado */
-@import './index.css';
+/* Baseado nas cores corretas da página inicial (chat) */
 
-/* ===== TOKENS SEMÂNTICOS ===== */
+/* ===== CORES BASE (EXTRAÍDAS DA PÁGINA INICIAL) ===== */
 :root {
-  /* Status colors - mapped to existing tokens */
-  --success: var(--chart-2); /* Green */
-  --warning: var(--chart-3); /* Yellow */
-  --info: var(--chart-1); /* Blue */
-  --danger: var(--destructive); /* Red */
+  /* Surfaces - baseado na página inicial */
+  --app-background: #f9fafb; /* bg-gray-50 */
+  --app-card: #ffffff; /* bg-white */
+  --app-section: #f3f4f6; /* bg-gray-100 */
+  --app-dark: #1f2937; /* bg-gray-800 */
   
-  /* Success variants */
-  --success-bg: hsl(159 100% 96%);
-  --success-border: hsl(159 100% 86%);
-  --success-text: hsl(159 100% 26%);
+  /* Text colors - baseado na página inicial */
+  --text-primary: #111827; /* text-gray-900 */
+  --text-secondary: #6b7280; /* text-gray-600 */
+  --text-muted: #9ca3af; /* text-gray-500 */
+  --text-light: #d1d5db; /* text-gray-300 */
   
-  /* Warning variants */
-  --warning-bg: hsl(42 100% 96%);
-  --warning-border: hsl(42 100% 86%);
-  --warning-text: hsl(42 92% 36%);
+  /* Borders - baseado na página inicial */
+  --border-primary: #e5e7eb; /* border-gray-200 */
+  --border-subtle: #f3f4f6; /* border-gray-100 */
+  --border-dark: #374151; /* border-gray-700 */
   
-  /* Info variants */
-  --info-bg: hsl(204 100% 96%);
-  --info-border: hsl(204 100% 86%);
-  --info-text: hsl(204 88% 33%);
+  /* Status colors - baseado nas categorias do chat */
+  --status-fuel-bg: #dbeafe; /* bg-blue-50 */
+  --status-fuel-text: #2563eb; /* text-blue-600 */
+  --status-fuel-border: #bfdbfe; /* border-blue-100 */
   
-  /* Danger variants */
-  --danger-bg: hsl(0 84% 96%);
-  --danger-border: hsl(0 84% 86%);
-  --danger-text: var(--destructive);
+  --status-analysis-bg: #dcfce7; /* bg-green-50 */
+  --status-analysis-text: #16a34a; /* text-green-600 */
+  --status-analysis-border: #bbf7d0; /* border-green-100 */
   
-  /* Surface levels */
-  --surface-1: var(--background);
-  --surface-2: var(--card);
-  --surface-3: var(--accent);
-}
-
-.dark {
-  /* Status colors for dark mode */
-  --success-bg: hsl(159 100% 6%);
-  --success-border: hsl(159 100% 16%);
-  --success-text: hsl(159 100% 66%);
+  --status-photo-bg: #faf5ff; /* bg-purple-50 */
+  --status-photo-text: #9333ea; /* text-purple-600 */
+  --status-photo-border: #e9d5ff; /* border-purple-100 */
   
-  --warning-bg: hsl(42 100% 6%);
-  --warning-border: hsl(42 100% 16%);
-  --warning-text: hsl(42 92% 76%);
+  --status-alert-bg: #fffbeb; /* bg-amber-50 */
+  --status-alert-text: #d97706; /* text-amber-600 */
+  --status-alert-border: #fed7aa; /* border-amber-100 */
   
-  --info-bg: hsl(204 100% 6%);
-  --info-border: hsl(204 100% 16%);
-  --info-text: hsl(204 88% 73%);
+  /* Fuel type specific colors (semânticos) */
+  --fuel-gasoline-bg: #fef2f2; /* bg-red-50 */
+  --fuel-gasoline-text: #dc2626; /* text-red-600 */
+  --fuel-gasoline-border: #fecaca; /* border-red-100 */
   
-  --danger-bg: hsl(0 84% 6%);
-  --danger-border: hsl(0 84% 16%);
-  --danger-text: var(--destructive);
+  --fuel-ethanol-bg: var(--status-analysis-bg);
+  --fuel-ethanol-text: var(--status-analysis-text);
+  --fuel-ethanol-border: var(--status-analysis-border);
+  
+  --fuel-diesel-bg: #fefce8; /* bg-yellow-50 */
+  --fuel-diesel-text: #ca8a04; /* text-yellow-600 */
+  --fuel-diesel-border: #fef3c7; /* border-yellow-100 */
+  
+  --fuel-gnv-bg: var(--status-fuel-bg);
+  --fuel-gnv-text: var(--status-fuel-text);
+  --fuel-gnv-border: var(--status-fuel-border);
 }
 
 /* ===== CLASSES PRIMITIVAS ===== */
 
 /* Layout */
 .app-page {
-  background-color: var(--surface-1);
-  color: var(--foreground);
+  background-color: var(--app-background);
+  color: var(--text-primary);
   min-height: 100vh;
 }
 
 .app-header {
-  background-color: var(--surface-2);
-  border-bottom: 1px solid var(--border);
-  color: var(--foreground);
+  background-color: var(--app-card);
+  border-bottom: 1px solid var(--border-primary);
+  color: var(--text-primary);
 }
 
 .app-card {
-  background-color: var(--surface-2);
-  border: 1px solid var(--border);
-  color: var(--card-foreground);
+  background-color: var(--app-card);
+  border: 1px solid var(--border-primary);
+  color: var(--text-primary);
 }
 
 .app-section {
-  background-color: var(--surface-3);
-  border: 1px solid var(--border);
-  color: var(--accent-foreground);
+  background-color: var(--app-section);
+  border: 1px solid var(--border-primary);
+  color: var(--text-primary);
 }
 
 /* Typography */
 .text-primary {
-  color: var(--foreground);
+  color: var(--text-primary);
 }
 
 .text-secondary {
-  color: var(--muted-foreground);
+  color: var(--text-secondary);
 }
 
 .text-muted {
-  color: var(--muted-foreground);
+  color: var(--text-muted);
 }
 
-/* Status badges/chips */
-.chip {
-  padding: 0.25rem 0.5rem;
-  border-radius: calc(var(--radius) * 0.5);
-  font-size: 0.75rem;
-  font-weight: 500;
-  display: inline-flex;
-  align-items: center;
+/* Status elements */
+.status-fuel {
+  background-color: var(--status-fuel-bg);
+  color: var(--status-fuel-text);
+  border: 1px solid var(--status-fuel-border);
 }
 
-.status-success {
-  background-color: var(--success-bg);
-  color: var(--success-text);
-  border: 1px solid var(--success-border);
+.status-analysis {
+  background-color: var(--status-analysis-bg);
+  color: var(--status-analysis-text);
+  border: 1px solid var(--status-analysis-border);
 }
 
-.status-warning {
-  background-color: var(--warning-bg);
-  color: var(--warning-text);
-  border: 1px solid var(--warning-border);
+.status-photo {
+  background-color: var(--status-photo-bg);
+  color: var(--status-photo-text);
+  border: 1px solid var(--status-photo-border);
 }
 
-.status-info {
-  background-color: var(--info-bg);
-  color: var(--info-text);
-  border: 1px solid var(--info-border);
+.status-alert {
+  background-color: var(--status-alert-bg);
+  color: var(--status-alert-text);
+  border: 1px solid var(--status-alert-border);
 }
 
-.status-danger {
-  background-color: var(--danger-bg);
-  color: var(--danger-text);
-  border: 1px solid var(--danger-border);
+/* Fuel type classes */
+.fuel-gasoline {
+  background-color: var(--fuel-gasoline-bg);
+  color: var(--fuel-gasoline-text);
+  border: 1px solid var(--fuel-gasoline-border);
 }
 
-/* Buttons */
+.fuel-ethanol {
+  background-color: var(--fuel-ethanol-bg);
+  color: var(--fuel-ethanol-text);
+  border: 1px solid var(--fuel-ethanol-border);
+}
+
+.fuel-diesel {
+  background-color: var(--fuel-diesel-bg);
+  color: var(--fuel-diesel-text);
+  border: 1px solid var(--fuel-diesel-border);
+}
+
+.fuel-gnv {
+  background-color: var(--fuel-gnv-bg);
+  color: var(--fuel-gnv-text);
+  border: 1px solid var(--fuel-gnv-border);
+}
+
+/* Buttons - mantendo consistência com a página inicial */
 .btn-primary {
-  background-color: var(--primary);
-  color: var(--primary-foreground);
-  border: 1px solid var(--primary);
-  border-radius: var(--radius);
-  padding: 0.75rem 1.5rem;
+  background-color: var(--app-dark);
+  color: white;
+  border: 1px solid var(--app-dark);
+  border-radius: 1rem;
+  padding: 1rem 1.5rem;
   font-weight: 600;
   transition: all 0.2s ease;
 }
 
 .btn-primary:hover {
-  opacity: 0.9;
-  transform: scale(0.98);
+  background-color: #374151; /* bg-gray-700 */
 }
 
 .btn-secondary {
-  background-color: var(--secondary);
-  color: var(--secondary-foreground);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 0.75rem 1.5rem;
+  background-color: var(--app-section);
+  color: var(--text-secondary);
+  border: 1px solid var(--border-primary);
+  border-radius: 1rem;
+  padding: 1rem 1.5rem;
   font-weight: 600;
   transition: all 0.2s ease;
 }
 
 .btn-secondary:hover {
-  background-color: var(--accent);
-}
-
-.btn-ghost {
-  background-color: transparent;
-  color: var(--muted-foreground);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 0.75rem 1.5rem;
-  font-weight: 500;
-  transition: all 0.2s ease;
-}
-
-.btn-ghost:hover {
-  background-color: var(--accent);
-  color: var(--accent-foreground);
-}
-
-/* Form inputs */
-.input-field {
-  background-color: var(--background);
-  border: 1px solid var(--input);
-  border-radius: var(--radius);
-  color: var(--foreground);
-  padding: 0.75rem;
-  transition: border-color 0.2s ease;
-}
-
-.input-field:focus {
-  outline: none;
-  border-color: var(--ring);
-  box-shadow: 0 0 0 2px hsl(var(--ring) / 0.2);
-}
-
-/* Fixed surfaces */
-.bottom-bar {
-  background-color: var(--surface-2);
-  border-top: 1px solid var(--border);
-  color: var(--card-foreground);
+  background-color: #e5e7eb; /* bg-gray-200 */
 }
 
 /* Progress indicators */
@@ -201,66 +179,22 @@
   width: 0.5rem;
   height: 0.5rem;
   border-radius: 50%;
-  background-color: var(--muted);
+  background-color: #d1d5db; /* bg-gray-300 */
 }
 
 .progress-step.active {
-  background-color: var(--primary);
-}
-
-/* Fuel type specific colors (semantic mapping) */
-.fuel-gasoline {
-  background-color: var(--danger-bg);
-  color: var(--danger-text);
-  border: 1px solid var(--danger-border);
-}
-
-.fuel-ethanol {
-  background-color: var(--success-bg);
-  color: var(--success-text);
-  border: 1px solid var(--success-border);
-}
-
-.fuel-diesel {
-  background-color: var(--warning-bg);
-  color: var(--warning-text);
-  border: 1px solid var(--warning-border);
-}
-
-.fuel-gnv {
-  background-color: var(--info-bg);
-  color: var(--info-text);
-  border: 1px solid var(--info-border);
+  background-color: var(--status-fuel-text);
 }
 
 /* Utilities */
 .border-default {
-  border-color: var(--border);
+  border-color: var(--border-primary);
 }
 
-.shadow-default {
-  box-shadow: 0 1px 3px 0 hsl(var(--foreground) / 0.1), 0 1px 2px 0 hsl(var(--foreground) / 0.06);
-}
-
-.shadow-md {
-  box-shadow: 0 4px 6px -1px hsl(var(--foreground) / 0.1), 0 2px 4px -1px hsl(var(--foreground) / 0.06);
-}
-
-.rounded-default {
-  border-radius: var(--radius);
+.border-subtle {
+  border-color: var(--border-subtle);
 }
 
 .rounded-large {
-  border-radius: calc(var(--radius) * 1.5);
-}
-
-/* Hover states */
-.hover-lift:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 4px 12px hsl(var(--foreground) / 0.15);
-}
-
-.hover-accent:hover {
-  background-color: var(--accent);
-  color: var(--accent-foreground);
+  border-radius: 1rem;
 }

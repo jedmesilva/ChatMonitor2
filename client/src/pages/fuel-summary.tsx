@@ -110,25 +110,25 @@ const FuelSummaryScreen = () => {
   const getChangeColor = (value, invert = false) => {
     if (value > 0) return invert ? 'text-red-600' : 'text-green-600';
     if (value < 0) return invert ? 'text-green-600' : 'text-red-600';
-    return 'text-secondary';
+    return 'text-gray-500';
   };
 
   const formatCurrency = (value) => `R$ ${value.toFixed(2).replace('.', ',')}`;
 
   return (
-    <div className="app-page">
+    <div className="min-h-screen bg-gray-50">
       {/* Header */}
-      <div className="app-header px-4 py-4">
+      <div className="bg-white border-b border-gray-200 px-4 py-4">
         <div className="flex items-center gap-4">
           <button 
             className="w-10 h-10 rounded-xl bg-gray-100 flex items-center justify-center"
             onClick={goBack}
           >
-            <ArrowLeft className="w-5 h-5 text-secondary" />
+            <ArrowLeft className="w-5 h-5 text-gray-500" />
           </button>
           <div className="flex-1">
-            <h1 className="text-lg font-semibold text-primary">Resumo do Abastecimento</h1>
-            <p className="text-sm text-secondary">Comparativo com abastecimento anterior</p>
+            <h1 className="text-lg font-semibold text-gray-900">Resumo do Abastecimento</h1>
+            <p className="text-sm text-gray-500">Comparativo com abastecimento anterior</p>
           </div>
           <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center">
             <CheckCircle className="w-6 h-6 text-green-600" />
@@ -138,8 +138,8 @@ const FuelSummaryScreen = () => {
 
       <div className="p-4 space-y-6 pb-32">
         {/* Resumo Principal */}
-        <div className="app-card rounded-large overflow-hidden">
-          <div className="p-4 border-b border-gray-100 bg-blue-50">
+        <div className="bg-white rounded-2xl border border-gray-200 overflow-hidden">
+          <div className="p-4 border-b border-gray-100 status-fuel">
             <div className="flex items-center gap-2">
               <Fuel className="w-4 h-4 text-blue-600" />
               <span className="text-sm font-semibold text-blue-900">Abastecimento Registrado</span>
@@ -148,10 +148,10 @@ const FuelSummaryScreen = () => {
           
           <div className="p-6">
             <div className="text-center mb-6">
-              <div className="text-3xl font-bold text-primary mb-1">
+              <div className="text-3xl font-bold text-gray-900 mb-1">
                 {formatCurrency(currentFueling.totalValue)}
               </div>
-              <div className="text-sm text-secondary">
+              <div className="text-sm text-gray-500">
                 {currentFueling.totalLiters.toFixed(1)} litros • {currentFueling.station.name}
               </div>
               <div className="text-xs text-gray-400 mt-1">
@@ -166,24 +166,24 @@ const FuelSummaryScreen = () => {
 
             <div className="grid grid-cols-3 gap-4 text-center">
               <div>
-                <div className="text-lg font-bold text-primary">{distanceTraveled.toLocaleString('pt-BR')}</div>
-                <div className="text-xs text-secondary">km rodados</div>
+                <div className="text-lg font-bold text-gray-900">{distanceTraveled.toLocaleString('pt-BR')}</div>
+                <div className="text-xs text-gray-500">km rodados</div>
               </div>
               <div>
-                <div className="text-lg font-bold text-primary">{daysBetween}</div>
-                <div className="text-xs text-secondary">dias</div>
+                <div className="text-lg font-bold text-gray-900">{daysBetween}</div>
+                <div className="text-xs text-gray-500">dias</div>
               </div>
               <div>
-                <div className="text-lg font-bold text-primary">{avgDailyKm}</div>
-                <div className="text-xs text-secondary">km/dia</div>
+                <div className="text-lg font-bold text-gray-900">{avgDailyKm}</div>
+                <div className="text-xs text-gray-500">km/dia</div>
               </div>
             </div>
           </div>
         </div>
 
         {/* Análise de Consumo */}
-        <div className="app-card rounded-large overflow-hidden">
-          <div className="p-4 border-b border-gray-100 bg-green-50">
+        <div className="bg-white rounded-2xl border border-gray-200 overflow-hidden">
+          <div className="p-4 border-b border-gray-100 status-analysis">
             <div className="flex items-center gap-2">
               <Activity className="w-4 h-4 text-green-600" />
               <span className="text-sm font-semibold text-green-900">Análise de Consumo</span>
@@ -193,8 +193,8 @@ const FuelSummaryScreen = () => {
           <div className="p-6">
             <div className="flex items-center justify-between mb-4">
               <div>
-                <div className="text-2xl font-bold text-primary">{consumption} km/L</div>
-                <div className="text-sm text-secondary">Consumo no período</div>
+                <div className="text-2xl font-bold text-gray-900">{consumption} km/L</div>
+                <div className="text-sm text-gray-500">Consumo no período</div>
               </div>
               <div className={`px-3 py-1 rounded-full text-sm font-medium ${
                 consumptionStatus.color === 'green' ? 'bg-green-100 text-green-800' :
@@ -207,8 +207,8 @@ const FuelSummaryScreen = () => {
             </div>
 
             <div className={`p-4 rounded-xl ${
-              consumptionStatus.color === 'green' ? 'bg-green-50 border border-green-100' :
-              consumptionStatus.color === 'blue' ? 'bg-blue-50 border border-blue-100' :
+              consumptionStatus.color === 'green' ? 'status-analysis border border-green-100' :
+              consumptionStatus.color === 'blue' ? 'status-fuel border border-blue-100' :
               consumptionStatus.color === 'yellow' ? 'bg-yellow-50 border border-yellow-100' :
               'bg-red-50 border border-red-100'
             }`}>
@@ -247,22 +247,22 @@ const FuelSummaryScreen = () => {
 
         {/* Comparações */}
         <div className="space-y-4">
-          <h3 className="text-lg font-semibold text-primary">Comparativo</h3>
+          <h3 className="text-lg font-semibold text-gray-900">Comparativo</h3>
           
           {/* Comparação de Preços */}
-          <div className="app-card rounded-large p-5">
+          <div className="bg-white rounded-2xl border border-gray-200 p-5">
             <div className="flex items-center justify-between mb-3">
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center">
                   <TrendingUp className="w-5 h-5 text-blue-600" />
                 </div>
                 <div>
-                  <h4 className="text-base font-medium text-primary">Preço do Combustível</h4>
-                  <p className="text-xs text-secondary">Gasolina Comum - comparação</p>
+                  <h4 className="text-base font-medium text-gray-900">Preço do Combustível</h4>
+                  <p className="text-xs text-gray-500">Gasolina Comum - comparação</p>
                 </div>
               </div>
               <div className="text-right">
-                <div className="text-lg font-bold text-primary">
+                <div className="text-lg font-bold text-gray-900">
                   {formatCurrency(currentFueling.fuels[0].pricePerLiter)}/L
                 </div>
                 <div className={`text-sm font-medium flex items-center gap-1 ${getChangeColor(priceComparison, true)}`}>
@@ -272,7 +272,7 @@ const FuelSummaryScreen = () => {
                 </div>
               </div>
             </div>
-            <div className="text-xs text-secondary flex justify-between">
+            <div className="text-xs text-gray-500 flex justify-between">
               <span>Anterior: {formatCurrency(previousFueling.fuels[0].pricePerLiter)}/L</span>
               <span>
                 {priceComparison > 0 ? 'Aumento no preço' : 
@@ -282,28 +282,28 @@ const FuelSummaryScreen = () => {
           </div>
 
           {/* Comparação de Posto */}
-          <div className="app-card rounded-large p-5">
+          <div className="bg-white rounded-2xl border border-gray-200 p-5">
             <div className="flex items-center justify-between mb-3">
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 bg-orange-100 rounded-lg flex items-center justify-center">
                   <MapPin className="w-5 h-5 text-orange-600" />
                 </div>
                 <div>
-                  <h4 className="text-base font-medium text-primary">Posto de Combustível</h4>
-                  <p className="text-xs text-secondary">Local do abastecimento</p>
+                  <h4 className="text-base font-medium text-gray-900">Posto de Combustível</h4>
+                  <p className="text-xs text-gray-500">Local do abastecimento</p>
                 </div>
               </div>
               <div className="text-right">
-                <div className="text-sm font-medium text-primary">{currentFueling.station.name}</div>
+                <div className="text-sm font-medium text-gray-900">{currentFueling.station.name}</div>
                 {currentFueling.station.name !== previousFueling.station.name ? (
                   <div className="text-xs text-blue-600 font-medium">Posto diferente</div>
                 ) : (
-                  <div className="text-xs text-secondary">Mesmo posto</div>
+                  <div className="text-xs text-gray-500">Mesmo posto</div>
                 )}
               </div>
             </div>
             
-            <div className="text-xs text-secondary">
+            <div className="text-xs text-gray-500">
               <div className="flex justify-between mb-1">
                 <span>Atual:</span>
                 <span>{currentFueling.station.name}</span>
@@ -315,7 +315,7 @@ const FuelSummaryScreen = () => {
             </div>
             
             {currentFueling.station.name !== previousFueling.station.name && (
-              <div className="mt-3 p-3 bg-blue-50 rounded-lg">
+              <div className="mt-3 p-3 status-fuel rounded-lg">
                 <div className="text-xs text-blue-700">
                   Você mudou de posto. Isso pode explicar a diferença no preço do combustível.
                 </div>
@@ -324,19 +324,19 @@ const FuelSummaryScreen = () => {
           </div>
 
           {/* Comparação de Valor Gasto */}
-          <div className="app-card rounded-large p-5">
+          <div className="bg-white rounded-2xl border border-gray-200 p-5">
             <div className="flex items-center justify-between mb-3">
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center">
                   <DollarSign className="w-5 h-5 text-purple-600" />
                 </div>
                 <div>
-                  <h4 className="text-base font-medium text-primary">Valor do Abastecimento</h4>
-                  <p className="text-xs text-secondary">Comparação de gastos</p>
+                  <h4 className="text-base font-medium text-gray-900">Valor do Abastecimento</h4>
+                  <p className="text-xs text-gray-500">Comparação de gastos</p>
                 </div>
               </div>
               <div className="text-right">
-                <div className="text-lg font-bold text-primary">{formatCurrency(currentFueling.totalValue)}</div>
+                <div className="text-lg font-bold text-gray-900">{formatCurrency(currentFueling.totalValue)}</div>
                 <div className={`text-sm font-medium flex items-center gap-1 ${getChangeColor(valueComparison, true)}`}>
                   {getChangeIcon(valueComparison)}
                   {valueComparison === 0 ? 'Mesmo valor' : 
@@ -344,7 +344,7 @@ const FuelSummaryScreen = () => {
                 </div>
               </div>
             </div>
-            <div className="text-xs text-secondary flex justify-between">
+            <div className="text-xs text-gray-500 flex justify-between">
               <span>Anterior: {formatCurrency(previousFueling.totalValue)}</span>
               <span>
                 {valueComparison > 0 ? 'Gastou mais' : 
@@ -377,14 +377,14 @@ const FuelSummaryScreen = () => {
         {/* Detalhes Expandidos */}
         <button
           onClick={() => setShowDetails(!showDetails)}
-          className="w-full text-left app-card rounded-large p-4 hover:bg-gray-50 transition-colors"
+          className="w-full text-left bg-white rounded-2xl border border-gray-200 p-4 hover:bg-gray-50 transition-colors"
         >
           <div className="flex items-center justify-between">
             <span className="text-sm font-medium text-gray-700">
               {showDetails ? 'Ocultar detalhes' : 'Ver detalhes completos'}
             </span>
             <div className={`transform transition-transform ${showDetails ? 'rotate-180' : ''}`}>
-              <TrendingUp className="w-4 h-4 text-secondary" />
+              <TrendingUp className="w-4 h-4 text-gray-500" />
             </div>
           </div>
         </button>
@@ -392,25 +392,25 @@ const FuelSummaryScreen = () => {
         {showDetails && (
           <div className="space-y-4">
             {/* Detalhes do Abastecimento Atual */}
-            <div className="app-card rounded-large p-5">
-              <h4 className="text-base font-semibold text-primary mb-4">Abastecimento Atual</h4>
+            <div className="bg-white rounded-2xl border border-gray-200 p-5">
+              <h4 className="text-base font-semibold text-gray-900 mb-4">Abastecimento Atual</h4>
               <div className="space-y-3 text-sm">
                 <div className="flex justify-between">
-                  <span className="text-secondary">Data:</span>
+                  <span className="text-gray-500">Data:</span>
                   <span className="font-medium">{new Date(currentFueling.date).toLocaleDateString('pt-BR')}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-secondary">KM:</span>
+                  <span className="text-gray-500">KM:</span>
                   <span className="font-medium">{currentFueling.km.toLocaleString('pt-BR')} km</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-secondary">Posto:</span>
+                  <span className="text-gray-500">Posto:</span>
                   <span className="font-medium">{currentFueling.station.name}</span>
                 </div>
                 {currentFueling.fuels.map((fuel, index) => (
                   <div key={index} className="border-t border-gray-100 pt-2">
                     <div className="flex justify-between items-center">
-                      <span className="text-secondary">{fuel.type}:</span>
+                      <span className="text-gray-500">{fuel.type}:</span>
                       <span className="font-medium">{fuel.liters}L • {formatCurrency(fuel.pricePerLiter)}/L</span>
                     </div>
                   </div>
@@ -419,9 +419,9 @@ const FuelSummaryScreen = () => {
             </div>
 
             {/* Detalhes do Abastecimento Anterior */}
-            <div className="app-card rounded-large p-5">
-              <h4 className="text-base font-semibold text-primary mb-4">Abastecimento Anterior</h4>
-              <div className="space-y-3 text-sm text-secondary">
+            <div className="bg-white rounded-2xl border border-gray-200 p-5">
+              <h4 className="text-base font-semibold text-gray-900 mb-4">Abastecimento Anterior</h4>
+              <div className="space-y-3 text-sm text-gray-500">
                 <div className="flex justify-between">
                   <span>Data:</span>
                   <span>{new Date(previousFueling.date).toLocaleDateString('pt-BR')}</span>

@@ -184,28 +184,28 @@ const KilometerageInputScreen = () => {
       <div className="app-header px-4 py-4">
         <div className="flex items-center gap-4">
           <button 
-            className="w-10 h-10 rounded-large app-section flex items-center justify-center"
+            className="w-10 h-10 rounded-large bg-gray-50 flex items-center justify-center"
             onClick={goBack}
           >
-            <ArrowLeft className="w-5 h-5 text-secondary" />
+            <ArrowLeft className="w-5 h-5 text-gray-500" />
           </button>
           <div className="flex-1">
-            <h1 className="text-lg font-semibold text-primary">Quilometragem Atual</h1>
-            <p className="text-sm text-secondary">{currentVehicle.name} • {currentVehicle.plate}</p>
+            <h1 className="text-lg font-semibold text-gray-900">Quilometragem Atual</h1>
+            <p className="text-sm text-gray-500">{currentVehicle.name} • {currentVehicle.plate}</p>
           </div>
           <div className="flex items-center gap-2">
             <div className="w-2 h-2 rounded-full bg-gray-300"></div>
             <div className="w-2 h-2 rounded-full bg-gray-300"></div>
             <div className="w-2 h-2 rounded-full bg-blue-600"></div>
-            <span className="text-xs text-secondary ml-1">3/3</span>
+            <span className="text-xs text-gray-500 ml-1">3/3</span>
           </div>
         </div>
       </div>
 
       <div className="p-4 space-y-6 pb-40">
         {/* Posto selecionado */}
-        <div className="app-card rounded-large overflow-hidden">
-          <div className="p-4 border-b border-gray-100 bg-green-50">
+        <div className="bg-white rounded-2xl border border-gray-200 overflow-hidden">
+          <div className="p-4 border-b border-gray-100 status-analysis">
             <div className="flex items-center gap-2">
               <Check className="w-4 h-4 text-green-600" />
               <span className="text-sm font-semibold text-green-900">Posto Confirmado</span>
@@ -215,8 +215,8 @@ const KilometerageInputScreen = () => {
           <div className="p-4">
             <div className="flex items-start justify-between">
               <div className="flex-1">
-                <h3 className="font-semibold text-primary mb-1">{selectedStation.name}</h3>
-                <div className="flex items-center gap-2 text-sm text-secondary">
+                <h3 className="font-semibold text-gray-900 mb-1">{selectedStation.name}</h3>
+                <div className="flex items-center gap-2 text-sm text-gray-500">
                   <MapPin className="w-3 h-3" />
                   <span>{selectedStation.address}</span>
                 </div>
@@ -226,20 +226,20 @@ const KilometerageInputScreen = () => {
         </div>
 
         {/* Resumo do abastecimento */}
-        <div className="app-card rounded-large overflow-hidden">
-          <div className="p-4 border-b border-gray-100 app-section">
-            <h3 className="font-semibold text-primary">Resumo do Abastecimento</h3>
+        <div className="bg-white rounded-2xl border border-gray-200 overflow-hidden">
+          <div className="p-4 border-b border-gray-100 bg-gray-50">
+            <h3 className="font-semibold text-gray-900">Resumo do Abastecimento</h3>
           </div>
           
           <div className="p-4">
             <div className="grid grid-cols-2 gap-4 mb-4">
               <div className="text-left">
-                <div className="text-2xl font-bold text-primary">{totalLiters.toFixed(1)} L</div>
-                <div className="text-sm text-secondary">Total de litros</div>
+                <div className="text-2xl font-bold text-gray-900">{totalLiters.toFixed(1)} L</div>
+                <div className="text-sm text-gray-500">Total de litros</div>
               </div>
               <div className="text-right">
-                <div className="text-2xl font-bold text-primary">R$ {totalValue.toFixed(2).replace('.', ',')}</div>
-                <div className="text-sm text-secondary">Valor total</div>
+                <div className="text-2xl font-bold text-gray-900">R$ {totalValue.toFixed(2).replace('.', ',')}</div>
+                <div className="text-sm text-gray-500">Valor total</div>
               </div>
             </div>
             
@@ -255,13 +255,13 @@ const KilometerageInputScreen = () => {
                         <span className={`px-2 py-1 rounded-lg text-xs font-medium ${getFuelTypeColor(item.fuelType)}`}>
                           {item.fuelType}
                         </span>
-                        <span className="text-xs font-medium text-blue-600 bg-blue-50 px-2 py-1 rounded-full">
+                        <span className="text-xs font-medium text-blue-600 status-fuel px-2 py-1 rounded-full">
                           {percentage}%
                         </span>
                       </div>
                       <span className="font-semibold text-sm">{item.liters} L</span>
                     </div>
-                    <div className="flex justify-between items-center text-xs text-secondary pl-1">
+                    <div className="flex justify-between items-center text-xs text-gray-500 pl-1">
                       <span>R$ {item.pricePerLiter.replace('.', ',')}/L</span>
                       <span>R$ {item.totalPrice.replace('.', ',')}</span>
                     </div>
@@ -273,8 +273,8 @@ const KilometerageInputScreen = () => {
         </div>
 
         {/* Informações do odômetro */}
-        <div className="app-card rounded-large overflow-hidden">
-          <div className="p-4 border-b border-gray-100 bg-blue-50">
+        <div className="bg-white rounded-2xl border border-gray-200 overflow-hidden">
+          <div className="p-4 border-b border-gray-100 status-fuel">
             <div className="flex items-center gap-2">
               <OdometerIcon size={16} className="text-blue-600" />
               <span className="text-sm font-semibold text-blue-900">Quilometragem do Odômetro</span>
@@ -283,8 +283,8 @@ const KilometerageInputScreen = () => {
           
           <div className="p-6">
             <div className="text-center mb-4">
-              <div className="text-sm text-secondary mb-2">Última quilometragem registrada</div>
-              <div className="text-2xl font-bold text-primary">
+              <div className="text-sm text-gray-500 mb-2">Última quilometragem registrada</div>
+              <div className="text-2xl font-bold text-gray-900">
                 {currentVehicle.lastKm.toLocaleString('pt-BR')} km
               </div>
               <div className="text-xs text-gray-400 mt-1">
@@ -303,11 +303,11 @@ const KilometerageInputScreen = () => {
                 placeholder="90.000"
                 className="w-full text-3xl font-bold text-center py-4 px-4 border-2 border-gray-200 rounded-xl focus:border-blue-500 focus:outline-none"
               />
-              <p className="text-center text-secondary text-sm mt-2">quilômetros</p>
+              <p className="text-center text-gray-500 text-sm mt-2">quilômetros</p>
             </div>
             
             {km && (
-              <div className="p-4 bg-blue-50 rounded-xl">
+              <div className="p-4 status-fuel rounded-xl">
                 <div className="text-center">
                   <div className="text-sm text-blue-600 mb-1">Distância percorrida:</div>
                   <div className="text-xl font-bold text-blue-900 mb-2">
@@ -332,10 +332,10 @@ const KilometerageInputScreen = () => {
         </div>
 
         {/* Opções de captura automática */}
-        <div className="app-card rounded-large overflow-hidden">
+        <div className="bg-white rounded-2xl border border-gray-200 overflow-hidden">
           <div className="p-4 border-b border-gray-100">
-            <h3 className="text-sm font-semibold text-primary mb-1">Captura Automática</h3>
-            <p className="text-xs text-secondary">Detecte a quilometragem do odômetro automaticamente</p>
+            <h3 className="text-sm font-semibold text-gray-900 mb-1">Captura Automática</h3>
+            <p className="text-xs text-gray-500">Detecte a quilometragem do odômetro automaticamente</p>
           </div>
           
           <div className="p-4">
@@ -343,15 +343,15 @@ const KilometerageInputScreen = () => {
               <button
                 onClick={() => simulateKmCapture()}
                 disabled={isProcessing}
-                className="group relative app-section hover:bg-gray-100 border border-gray-200 rounded-xl p-4 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+                className="group relative bg-gray-50 hover:bg-gray-100 border border-gray-200 rounded-xl p-4 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 <div className="flex flex-col items-center gap-3">
                   <div className="w-12 h-12 bg-gray-800 rounded-xl flex items-center justify-center group-hover:bg-gray-900 transition-colors">
                     <Camera className="w-6 h-6 text-white" />
                   </div>
                   <div className="text-center">
-                    <div className="text-sm font-medium text-primary">Câmera</div>
-                    <div className="text-xs text-secondary">Foto do painel</div>
+                    <div className="text-sm font-medium text-gray-900">Câmera</div>
+                    <div className="text-xs text-gray-500">Foto do painel</div>
                   </div>
                 </div>
               </button>
@@ -359,15 +359,15 @@ const KilometerageInputScreen = () => {
               <button
                 onClick={() => simulateKmCapture()}
                 disabled={isProcessing}
-                className="group relative app-section hover:bg-gray-100 border border-gray-200 rounded-xl p-4 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+                className="group relative bg-gray-50 hover:bg-gray-100 border border-gray-200 rounded-xl p-4 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 <div className="flex flex-col items-center gap-3">
                   <div className="w-12 h-12 bg-gray-800 rounded-xl flex items-center justify-center group-hover:bg-gray-900 transition-colors">
                     <Mic className="w-6 h-6 text-white" />
                   </div>
                   <div className="text-center">
-                    <div className="text-sm font-medium text-primary">Voz</div>
-                    <div className="text-xs text-secondary">Ditar KM</div>
+                    <div className="text-sm font-medium text-gray-900">Voz</div>
+                    <div className="text-xs text-gray-500">Ditar KM</div>
                   </div>
                 </div>
               </button>
@@ -375,28 +375,28 @@ const KilometerageInputScreen = () => {
               <button
                 onClick={() => fileInputRef.current?.click()}
                 disabled={isProcessing}
-                className="group relative app-section hover:bg-gray-100 border border-gray-200 rounded-xl p-4 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+                className="group relative bg-gray-50 hover:bg-gray-100 border border-gray-200 rounded-xl p-4 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 <div className="flex flex-col items-center gap-3">
                   <div className="w-12 h-12 bg-gray-800 rounded-xl flex items-center justify-center group-hover:bg-gray-900 transition-colors">
                     <Upload className="w-6 h-6 text-white" />
                   </div>
                   <div className="text-center">
-                    <div className="text-sm font-medium text-primary">Galeria</div>
-                    <div className="text-xs text-secondary">Enviar foto</div>
+                    <div className="text-sm font-medium text-gray-900">Galeria</div>
+                    <div className="text-xs text-gray-500">Enviar foto</div>
                   </div>
                 </div>
               </button>
             </div>
             
-            <div className="p-3 app-section border border-gray-200 rounded-xl">
+            <div className="p-3 bg-gray-50 border border-gray-200 rounded-xl">
               <div className="flex items-start gap-3">
                 <div className="w-5 h-5 bg-blue-600 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
                   <span className="text-xs font-bold text-white">i</span>
                 </div>
                 <div>
-                  <div className="text-sm font-medium text-primary mb-1">Dica de captura</div>
-                  <div className="text-xs text-secondary leading-relaxed">
+                  <div className="text-sm font-medium text-gray-900 mb-1">Dica de captura</div>
+                  <div className="text-xs text-gray-500 leading-relaxed">
                     Para melhor precisão, fotografe o odômetro com boa iluminação e certifique-se de que todos os números estejam visíveis e nítidos.
                   </div>
                 </div>
@@ -406,7 +406,7 @@ const KilometerageInputScreen = () => {
         </div>
 
         {/* Informação sobre pular */}
-        <div className="bg-yellow-50 border border-yellow-200 rounded-2xl p-4">
+        <div className="status-alert border border-yellow-200 rounded-2xl p-4">
           <div className="flex items-start gap-3">
             <AlertCircle className="w-5 h-5 text-yellow-600 flex-shrink-0 mt-0.5" />
             <div>
@@ -431,7 +431,7 @@ const KilometerageInputScreen = () => {
           <div className="bg-white rounded-2xl p-6 border border-gray-200">
             <div className="flex items-center justify-center gap-3">
               <div className="animate-spin w-5 h-5 border-2 border-blue-500 border-t-transparent rounded-full" />
-              <span className="text-secondary">Processando...</span>
+              <span className="text-gray-500">Processando...</span>
             </div>
           </div>
         )}
@@ -456,7 +456,7 @@ const KilometerageInputScreen = () => {
               disabled={isProcessing}
               className={`w-full py-4 rounded-2xl font-semibold transition-all duration-200 ${
                 !isProcessing
-                  ? 'bg-primary text-primary-foreground active:scale-95 hover:bg-primary/90'
+                  ? 'bg-primary text-gray-900-foreground active:scale-95 hover:bg-primary/90'
                   : 'bg-gray-100 text-gray-400 cursor-not-allowed'
               }`}
             >
@@ -470,7 +470,7 @@ const KilometerageInputScreen = () => {
             <button
               onClick={skipKm}
               disabled={isProcessing}
-              className="w-full py-4 rounded-2xl font-semibold text-secondary border border-gray-200 hover:app-section transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full py-4 rounded-2xl font-semibold text-gray-500 border border-gray-200 hover:bg-gray-50 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {isProcessing ? 'Salvando...' : 'Finalizar sem Quilometragem'}
             </button>

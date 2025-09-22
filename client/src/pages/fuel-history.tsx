@@ -257,9 +257,9 @@ const FuelHistoryScreen = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="app-page">
       {/* Header */}
-      <div className="bg-white border-b border-gray-200 px-4 py-4">
+      <div className="app-header px-4 py-4">
         <div className="flex items-center gap-4">
           <button 
             className="w-10 h-10 rounded-xl bg-gray-100 flex items-center justify-center"
@@ -268,8 +268,8 @@ const FuelHistoryScreen = () => {
             <ArrowLeft className="w-5 h-5 text-gray-600" />
           </button>
           <div className="flex-1">
-            <h1 className="text-lg font-semibold text-gray-900">Abastecimentos</h1>
-            <p className="text-sm text-gray-500">{currentVehicle.name} • {currentVehicle.plate}</p>
+            <h1 className="text-lg font-semibold text-primary">Abastecimentos</h1>
+            <p className="text-sm text-secondary">{currentVehicle.name} • {currentVehicle.plate}</p>
           </div>
           <button 
             className="w-10 h-10 rounded-xl bg-gray-100 flex items-center justify-center"
@@ -282,11 +282,11 @@ const FuelHistoryScreen = () => {
 
       <div className="p-4 space-y-6 pb-32">
         {/* Status do Veículo */}
-        <div className="bg-white rounded-2xl border border-gray-200 overflow-hidden">
+        <div className="app-card rounded-large overflow-hidden">
           <div className="p-4 border-b border-gray-100 bg-gray-50">
             <div className="flex items-center gap-2">
               <Car className="w-4 h-4 text-gray-600" />
-              <span className="text-sm font-semibold text-gray-900">Status Atual</span>
+              <span className="text-sm font-semibold text-primary">Status Atual</span>
             </div>
           </div>
           
@@ -297,10 +297,10 @@ const FuelHistoryScreen = () => {
                   <OdometerIcon size={20} className="text-blue-600" />
                 </div>
                 <div>
-                  <div className="text-lg font-bold text-gray-900">
+                  <div className="text-lg font-bold text-primary">
                     {currentVehicle.odometer.toLocaleString()} km
                   </div>
-                  <div className="text-xs text-gray-500">Quilometragem</div>
+                  <div className="text-xs text-secondary">Quilometragem</div>
                 </div>
               </div>
               
@@ -309,8 +309,8 @@ const FuelHistoryScreen = () => {
                   <FuelTankIcon size={20} className="text-green-600" level={currentVehicle.fuelLevel / 100} />
                 </div>
                 <div>
-                  <div className="text-lg font-bold text-gray-900">{currentVehicle.fuelLevel}%</div>
-                  <div className="text-xs text-gray-500">Combustível</div>
+                  <div className="text-lg font-bold text-primary">{currentVehicle.fuelLevel}%</div>
+                  <div className="text-xs text-secondary">Combustível</div>
                 </div>
               </div>
             </div>
@@ -328,14 +328,14 @@ const FuelHistoryScreen = () => {
         </div>
 
         {/* Estatísticas do Mês */}
-        <div className="bg-white rounded-2xl border border-gray-200 overflow-hidden">
+        <div className="app-card rounded-large overflow-hidden">
           <div className="p-4 border-b border-gray-100 bg-gray-50">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
                 <Activity className="w-4 h-4 text-gray-600" />
-                <span className="text-sm font-semibold text-gray-900">Setembro 2025</span>
+                <span className="text-sm font-semibold text-primary">Setembro 2025</span>
               </div>
-              <span className="text-xs text-gray-500">{monthlyStats.abastecimentos} abastecimentos</span>
+              <span className="text-xs text-secondary">{monthlyStats.abastecimentos} abastecimentos</span>
             </div>
           </div>
           
@@ -347,7 +347,7 @@ const FuelHistoryScreen = () => {
                   <span className="text-sm text-gray-600">Gasto Total</span>
                   {getTrendIcon(comparisons.spending.trend)}
                 </div>
-                <div className="text-xl font-bold text-gray-900">
+                <div className="text-xl font-bold text-primary">
                   {formatCurrency(comparisons.spending.value)}
                 </div>
                 <div className={`text-xs font-medium ${getTrendColor(comparisons.spending.trend)}`}>
@@ -361,7 +361,7 @@ const FuelHistoryScreen = () => {
                   <span className="text-sm text-gray-600">Consumo Médio</span>
                   {getTrendIcon(comparisons.consumption.trend)}
                 </div>
-                <div className="text-xl font-bold text-gray-900">
+                <div className="text-xl font-bold text-primary">
                   {comparisons.consumption.value.toFixed(1)} km/L
                 </div>
                 <div className={`text-xs font-medium ${getTrendColor(comparisons.consumption.trend)}`}>
@@ -375,7 +375,7 @@ const FuelHistoryScreen = () => {
                   <span className="text-sm text-gray-600">Total Litros</span>
                   <Fuel className="w-4 h-4 text-gray-600" />
                 </div>
-                <div className="text-xl font-bold text-gray-900">
+                <div className="text-xl font-bold text-primary">
                   {monthlyStats.totalLiters.toFixed(1)}L
                 </div>
                 <div className="text-xs text-gray-600">
@@ -389,7 +389,7 @@ const FuelHistoryScreen = () => {
                   <span className="text-sm text-gray-600">Preço Médio</span>
                   {getTrendIcon(comparisons.avgPrice.trend)}
                 </div>
-                <div className="text-xl font-bold text-gray-900">
+                <div className="text-xl font-bold text-primary">
                   {formatCurrency(comparisons.avgPrice.value)}/L
                 </div>
                 <div className={`text-xs font-medium ${getTrendColor(comparisons.avgPrice.trend)}`}>
@@ -402,7 +402,7 @@ const FuelHistoryScreen = () => {
 
         {/* Busca (se necessário) */}
         {showFilters && (
-          <div className="bg-white rounded-2xl border border-gray-200 p-4">
+          <div className="app-card rounded-large p-4">
             <div className="flex items-center gap-3">
               <div className="flex-1 relative">
                 <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
@@ -421,21 +421,21 @@ const FuelHistoryScreen = () => {
         {/* Lista de Abastecimentos */}
         <div className="space-y-4">
           <div className="flex items-center justify-between">
-            <h2 className="text-lg font-semibold text-gray-900">Histórico</h2>
-            <span className="text-sm text-gray-500">{fuelingHistory.length} registros</span>
+            <h2 className="text-lg font-semibold text-primary">Histórico</h2>
+            <span className="text-sm text-secondary">{fuelingHistory.length} registros</span>
           </div>
           
           <div className="space-y-3">
             {fuelingHistory.map((fueling, index) => (
-              <div key={fueling.id} className="bg-white rounded-2xl border border-gray-200 p-4">
+              <div key={fueling.id} className="app-card rounded-large p-4">
                 {/* Header do Card */}
                 <div className="flex items-start justify-between mb-3">
                   <div className="flex-1">
                     <div className="flex items-center gap-2 mb-1">
-                      <h3 className="font-semibold text-gray-900">{fueling.station.name}</h3>
-                      <span className="text-xs text-gray-500">#{fueling.id.toString().padStart(3, '0')}</span>
+                      <h3 className="font-semibold text-primary">{fueling.station.name}</h3>
+                      <span className="text-xs text-secondary">#{fueling.id.toString().padStart(3, '0')}</span>
                     </div>
-                    <div className="flex items-center gap-2 text-sm text-gray-500 mb-1">
+                    <div className="flex items-center gap-2 text-sm text-secondary mb-1">
                       <MapPin className="w-3 h-3" />
                       <span>{fueling.station.address}</span>
                     </div>
@@ -464,15 +464,15 @@ const FuelHistoryScreen = () => {
                         <span className={`px-2 py-1 rounded-lg text-xs font-medium ${getFuelTypeColor(fuel.type)}`}>
                           {fuel.type}
                         </span>
-                        <span className="text-sm font-medium text-gray-900">
+                        <span className="text-sm font-medium text-primary">
                           {fuel.liters}L
                         </span>
                       </div>
                       <div className="text-right">
-                        <div className="text-sm font-bold text-gray-900">
+                        <div className="text-sm font-bold text-primary">
                           {formatCurrency(fuel.totalPrice)}
                         </div>
-                        <div className="text-xs text-gray-500">
+                        <div className="text-xs text-secondary">
                           {formatCurrency(fuel.pricePerLiter)}/L
                         </div>
                       </div>
@@ -484,25 +484,25 @@ const FuelHistoryScreen = () => {
                 <div className="flex items-center justify-between pt-3 border-t border-gray-100">
                   <div className="flex items-center gap-4">
                     <div className="text-center">
-                      <div className="text-lg font-bold text-gray-900">
+                      <div className="text-lg font-bold text-primary">
                         {formatCurrency(fueling.totalValue)}
                       </div>
-                      <div className="text-xs text-gray-500">Total</div>
+                      <div className="text-xs text-secondary">Total</div>
                     </div>
                     
                     <div className="text-center">
-                      <div className="text-lg font-bold text-gray-900">
+                      <div className="text-lg font-bold text-primary">
                         {fueling.totalLiters}L
                       </div>
-                      <div className="text-xs text-gray-500">Volume</div>
+                      <div className="text-xs text-secondary">Volume</div>
                     </div>
                     
                     {fueling.efficiency && (
                       <div className="text-center">
-                        <div className="text-lg font-bold text-gray-900">
+                        <div className="text-lg font-bold text-primary">
                           {fueling.efficiency.toFixed(1)}
                         </div>
-                        <div className="text-xs text-gray-500">km/L</div>
+                        <div className="text-xs text-secondary">km/L</div>
                       </div>
                     )}
                   </div>

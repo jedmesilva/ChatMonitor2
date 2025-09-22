@@ -77,11 +77,11 @@ const FuelInputScreen = () => {
 
   // Tipos de combustível
   const fuelTypes = [
-    { id: 'gasolina_comum', name: 'Gasolina Comum', color: 'bg-red-100 text-red-800' },
-    { id: 'gasolina_aditivada', name: 'Gasolina Aditivada', color: 'bg-red-100 text-red-800' },
-    { id: 'etanol', name: 'Etanol', color: 'bg-green-100 text-green-800' },
-    { id: 'diesel', name: 'Diesel', color: 'bg-yellow-100 text-yellow-800' },
-    { id: 'gnv', name: 'GNV', color: 'bg-blue-100 text-blue-800' }
+    { id: 'gasolina_comum', name: 'Gasolina Comum', color: 'fuel-gasoline' },
+    { id: 'gasolina_aditivada', name: 'Gasolina Aditivada', color: 'fuel-gasoline' },
+    { id: 'etanol', name: 'Etanol', color: 'fuel-ethanol' },
+    { id: 'diesel', name: 'Diesel', color: 'fuel-diesel' },
+    { id: 'gnv', name: 'GNV', color: 'fuel-gnv' }
   ];
 
   // Formatação
@@ -299,9 +299,9 @@ const FuelInputScreen = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="app-page">
       {/* Header */}
-      <div className="bg-white border-b border-gray-200 px-4 py-4">
+      <div className="app-header px-4 py-4">
         <div className="flex items-center gap-4">
           <button 
             className="w-10 h-10 rounded-xl bg-gray-100 flex items-center justify-center"
@@ -325,7 +325,7 @@ const FuelInputScreen = () => {
       <div className="p-4 space-y-6 pb-24">
         {/* Posto selecionado */}
         {selectedStation ? (
-          <div className="bg-white rounded-2xl border border-gray-200 overflow-hidden">
+          <div className="app-card rounded-large overflow-hidden">
             <div className="p-4 border-b border-gray-100 bg-green-50">
               <div className="flex items-center gap-2">
                 <Check className="w-4 h-4 text-green-600" />
@@ -376,7 +376,7 @@ const FuelInputScreen = () => {
             </div>
           </div>
         ) : (
-          <div className="bg-white rounded-2xl border border-gray-200 overflow-hidden">
+          <div className="app-card rounded-large overflow-hidden">
             <div className="p-4 border-b border-gray-100 bg-yellow-50">
               <div className="flex items-center gap-2">
                 <AlertCircle className="w-4 h-4 text-yellow-600" />
@@ -400,7 +400,7 @@ const FuelInputScreen = () => {
 
         {/* Lista de combustíveis adicionados */}
         {fuelItems.length > 0 && (
-          <div className="bg-white rounded-2xl border border-gray-200 overflow-hidden">
+          <div className="app-card rounded-large overflow-hidden">
             <div className="p-4 border-b border-gray-100 bg-gray-50">
               <h3 className="font-semibold text-gray-900">Combustíveis Adicionados</h3>
             </div>
@@ -576,7 +576,7 @@ const FuelInputScreen = () => {
         </div>
 
         {/* Opções de captura automática para combustível */}
-        <div className="bg-white rounded-2xl border border-gray-200 overflow-hidden">
+        <div className="app-card rounded-large overflow-hidden">
           <div className="p-4 border-b border-gray-100">
             <h3 className="text-sm font-semibold text-gray-900 mb-1">Captura Automática</h3>
             <p className="text-xs text-gray-500">Detecte valores do combustível automaticamente</p>

@@ -1,4 +1,3 @@
-
 import React, { useState, useRef } from 'react';
 import { useLocation } from 'wouter';
 import { 
@@ -42,7 +41,7 @@ const FuelInputScreen = () => {
   const [isProcessing, setIsProcessing] = useState(false);
   const [showFuelDropdown, setShowFuelDropdown] = useState(false);
   const [editingIndex, setEditingIndex] = useState(null);
-  
+
   const fileInputRef = useRef(null);
 
   // Dados do veículo atual
@@ -93,7 +92,7 @@ const FuelInputScreen = () => {
     const hasLiters = !!currentItem.liters;
     const hasPrice = !!currentItem.pricePerLiter;
     const hasTotal = !!currentItem.totalPrice;
-    
+
     return hasType && (
       (hasLiters && hasPrice) ||
       (hasTotal && hasPrice) ||
@@ -106,7 +105,7 @@ const FuelInputScreen = () => {
     const liters = parseFloat(currentItem.liters.replace(',', '.') || '0');
     const price = parseFloat(currentItem.pricePerLiter.replace(',', '.') || '0');
     const total = parseFloat(currentItem.totalPrice.replace(',', '.') || '0');
-    
+
     if (currentItem.liters && currentItem.pricePerLiter && !currentItem.totalPrice) {
       const calculatedTotal = (liters * price).toFixed(2);
       return `Total: R$ ${calculatedTotal.replace('.', ',')}`;
@@ -117,7 +116,7 @@ const FuelInputScreen = () => {
       const calculatedPrice = (total / liters).toFixed(3);
       return `Preço/L: R$ ${calculatedPrice.replace('.', ',')}`;
     }
-    
+
     return null;
   };
 
@@ -127,16 +126,16 @@ const FuelInputScreen = () => {
       setError('Selecione o tipo de combustível');
       return false;
     }
-    
+
     if (!canAddItem()) {
       setError('Preencha pelo menos 2 campos (ex: litros + preço/L)');
       return false;
     }
-    
+
     const liters = parseFloat(currentItem.liters.replace(',', '.') || '0');
     const price = parseFloat(currentItem.pricePerLiter.replace(',', '.') || '0');
     const total = parseFloat(currentItem.totalPrice.replace(',', '.') || '0');
-    
+
     if (currentItem.liters && (liters <= 0 || liters > 100)) {
       setError('Litros deve ser entre 0,1 e 100');
       return false;
@@ -149,7 +148,7 @@ const FuelInputScreen = () => {
       setError('Valor total deve ser maior que zero');
       return false;
     }
-    
+
     setError('');
     return true;
   };
@@ -159,19 +158,19 @@ const FuelInputScreen = () => {
       setError('Adicione pelo menos um combustível');
       return false;
     }
-    
+
     setError('');
     return true;
   };
 
   const handleInputChange = (field, value) => {
     let formattedValue = value;
-    
+
     if (field === 'liters' || field === 'pricePerLiter') {
       formattedValue = formatPrice(value);
     }
     setCurrentItem(prev => ({ ...prev, [field]: formattedValue }));
-    
+
     setError('');
   };
 
@@ -185,10 +184,10 @@ const FuelInputScreen = () => {
       const liters = parseFloat(currentItem.liters.replace(',', '.') || '0');
       const price = parseFloat(currentItem.pricePerLiter.replace(',', '.') || '0');
       const total = parseFloat(currentItem.totalPrice.replace(',', '.') || '0');
-      
+
       // Calcular valores faltantes
       let finalLiters, finalPrice, finalTotal;
-      
+
       if (currentItem.liters && currentItem.pricePerLiter) {
         finalLiters = currentItem.liters;
         finalPrice = currentItem.pricePerLiter;
@@ -202,7 +201,7 @@ const FuelInputScreen = () => {
         finalLiters = currentItem.liters;
         finalPrice = (total / liters).toFixed(3).replace('.', ',');
       }
-      
+
       const newItem = {
         id: editingIndex !== null ? fuelItems[editingIndex].id : Date.now(),
         fuelType: currentItem.fuelType,
@@ -210,7 +209,7 @@ const FuelInputScreen = () => {
         pricePerLiter: finalPrice,
         totalPrice: finalTotal
       };
-      
+
       if (editingIndex !== null) {
         const updatedItems = [...fuelItems];
         updatedItems[editingIndex] = newItem;
@@ -219,7 +218,7 @@ const FuelInputScreen = () => {
       } else {
         setFuelItems(prev => [...prev, newItem]);
       }
-      
+
       // Limpar formulário
       setCurrentItem({
         liters: '',
@@ -268,7 +267,7 @@ const FuelInputScreen = () => {
 
   const simulateFuelCapture = () => {
     setIsProcessing(true);
-    
+
     setTimeout(() => {
       // Simular dados de combustível detectados
       const mockLiters = (Math.random() * 30 + 20).toFixed(1).replace('.', ',');
@@ -314,11 +313,11 @@ const FuelInputScreen = () => {
             <p className="text-sm text-gray-500">{currentVehicle.name} • {currentVehicle.plate}</p>
           </div>
           <div className="flex items-center gap-2">
-            <div className="w-2 h-2 rounded-full bg-gray-300"></div>
-            <div className="w-2 h-2 rounded-full bg-blue-600"></div>
-            <div className="w-2 h-2 rounded-full bg-gray-300"></div>
-            <span className="text-xs text-gray-500 ml-1">2/3</span>
-          </div>
+              <div className="w-2 h-2 rounded-full bg-gray-300"></div>
+              <div className="w-2 h-2 rounded-full bg-gray-800"></div>
+              <div className="w-2 h-2 rounded-full bg-gray-300"></div>
+              <span className="text-xs text-gray-500 ml-1">2/3</span>
+            </div>
         </div>
       </div>
 
@@ -332,7 +331,7 @@ const FuelInputScreen = () => {
                 <span className="text-sm font-semibold text-green-900">Posto Selecionado</span>
               </div>
             </div>
-            
+
             <div className="p-4">
               <div className="flex items-start justify-between">
                 <div className="flex-1">
@@ -343,7 +342,7 @@ const FuelInputScreen = () => {
                     <MapPin className="w-3 h-3" />
                     <span>{selectedStation.address}</span>
                   </div>
-                  
+
                   {/* Preços do posto para referência */}
                   {selectedStation.prices && (
                     <div className="p-3 bg-gray-50 rounded-xl">
@@ -365,7 +364,7 @@ const FuelInputScreen = () => {
                     </div>
                   )}
                 </div>
-                
+
                 <button
                   onClick={() => setLocation('/abastecimentos/posto')}
                   className="text-blue-600 text-sm font-medium"
@@ -383,7 +382,7 @@ const FuelInputScreen = () => {
                 <span className="text-sm font-semibold text-yellow-900">Nenhum posto selecionado</span>
               </div>
             </div>
-            
+
             <div className="p-4">
               <p className="text-sm text-gray-600 mb-3">
                 Você pode registrar o abastecimento sem informar o posto, mas será mais difícil acompanhar onde você abastece.
@@ -404,12 +403,12 @@ const FuelInputScreen = () => {
             <div className="p-4 border-b border-gray-100 bg-gray-50">
               <h3 className="font-semibold text-gray-900">Combustíveis Adicionados</h3>
             </div>
-            
+
             <div className="divide-y divide-gray-100">
               {fuelItems.map((item, index) => {
                 const itemLiters = parseFloat(item.liters.replace(',', '.'));
                 const percentage = ((itemLiters / totalLiters) * 100).toFixed(1);
-                
+
                 return (
                   <div key={item.id} className="p-4 flex items-center justify-between">
                     <div className="flex-1">
@@ -427,7 +426,7 @@ const FuelInputScreen = () => {
                         <span>Total: R$ {item.totalPrice}</span>
                       </div>
                     </div>
-                    
+
                     <div className="flex items-center gap-2">
                       <button
                         onClick={() => editFuelItem(index)}
@@ -445,7 +444,7 @@ const FuelInputScreen = () => {
                   </div>
                 );
               })}
-              
+
               {/* Totais */}
               <div className="p-4 bg-blue-50">
                 <div className="flex justify-between items-center">
@@ -483,21 +482,21 @@ const FuelInputScreen = () => {
               </button>
             )}
           </div>
-          
+
           <div className="space-y-4">
             {/* Tipo de combustível */}
             <div className="relative">
               <label className="block text-sm font-medium text-gray-700 mb-2">Tipo de combustível</label>
               <button
                 onClick={() => setShowFuelDropdown(!showFuelDropdown)}
-                className="w-full p-3 border border-gray-200 rounded-xl focus:border-blue-500 focus:outline-none flex items-center justify-between text-left"
+                className="w-full p-3 border border-gray-200 rounded-xl focus:border-gray-800 focus:outline-none flex items-center justify-between text-left"
               >
                 <span className={currentItem.fuelType ? 'text-gray-900' : 'text-gray-500'}>
                   {currentItem.fuelType || 'Selecione o combustível'}
                 </span>
                 <ChevronDown className="w-5 h-5 text-gray-400" />
               </button>
-              
+
               {showFuelDropdown && (
                 <div className="absolute top-full left-0 right-0 mt-1 bg-white border border-gray-200 rounded-xl shadow-lg z-10">
                   {fuelTypes.map((type) => (
@@ -522,10 +521,10 @@ const FuelInputScreen = () => {
                   value={currentItem.liters}
                   onChange={(e) => handleInputChange('liters', e.target.value)}
                   placeholder="45,0"
-                  className="w-full p-3 border border-gray-200 rounded-xl focus:border-blue-500 focus:outline-none"
+                  className="w-full p-3 border border-gray-200 rounded-xl focus:border-gray-800 focus:outline-none"
                 />
               </div>
-              
+
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">Preço/L</label>
                 <input
@@ -533,10 +532,10 @@ const FuelInputScreen = () => {
                   value={currentItem.pricePerLiter}
                   onChange={(e) => handleInputChange('pricePerLiter', e.target.value)}
                   placeholder="5,49"
-                  className="w-full p-3 border border-gray-200 rounded-xl focus:border-blue-500 focus:outline-none"
+                  className="w-full p-3 border border-gray-200 rounded-xl focus:border-gray-800 focus:outline-none"
                 />
               </div>
-              
+
               <div className="col-span-2">
                 <label className="block text-sm font-medium text-gray-700 mb-2">Valor total</label>
                 <input
@@ -544,7 +543,7 @@ const FuelInputScreen = () => {
                   value={currentItem.totalPrice}
                   onChange={(e) => handleInputChange('totalPrice', e.target.value)}
                   placeholder="255,30"
-                  className="w-full p-3 border border-gray-200 rounded-xl focus:border-blue-500 focus:outline-none"
+                  className="w-full p-3 border border-gray-200 rounded-xl focus:border-gray-800 focus:outline-none"
                 />
               </div>
             </div>
@@ -581,7 +580,7 @@ const FuelInputScreen = () => {
             <h3 className="text-sm font-semibold text-gray-900 mb-1">Captura Automática</h3>
             <p className="text-xs text-gray-500">Detecte valores do combustível automaticamente</p>
           </div>
-          
+
           <div className="p-4">
             <div className="grid grid-cols-3 gap-3">
               <button
@@ -599,7 +598,7 @@ const FuelInputScreen = () => {
                   </div>
                 </div>
               </button>
-              
+
               <button
                 onClick={() => simulateFuelCapture()}
                 disabled={isProcessing}
@@ -615,7 +614,7 @@ const FuelInputScreen = () => {
                   </div>
                 </div>
               </button>
-              
+
               <button
                 onClick={() => fileInputRef.current?.click()}
                 disabled={isProcessing}

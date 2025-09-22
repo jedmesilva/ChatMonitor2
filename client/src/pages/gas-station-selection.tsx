@@ -253,16 +253,16 @@ const GasStationSelection = () => {
                       <div className="text-xs font-medium text-gray-700 mb-2">Preços disponíveis:</div>
                       <div className="grid grid-cols-2 gap-2 text-xs">
                         {selectedStation.prices.gasolina_comum && (
-                          <div>Comum: <span className="font-medium">R$ {selectedStation.prices.gasolina_comum}</span></div>
+                          <div>Comum: <span className="font-medium text-gray-800">R$ {selectedStation.prices.gasolina_comum}</span></div>
                         )}
                         {selectedStation.prices.gasolina_aditivada && (
-                          <div>Aditivada: <span className="font-medium">R$ {selectedStation.prices.gasolina_aditivada}</span></div>
+                          <div>Aditivada: <span className="font-medium text-gray-800">R$ {selectedStation.prices.gasolina_aditivada}</span></div>
                         )}
                         {selectedStation.prices.etanol && (
-                          <div>Etanol: <span className="font-medium">R$ {selectedStation.prices.etanol}</span></div>
+                          <div>Etanol: <span className="font-medium text-gray-800">R$ {selectedStation.prices.etanol}</span></div>
                         )}
                         {selectedStation.prices.diesel && (
-                          <div>Diesel: <span className="font-medium">R$ {selectedStation.prices.diesel}</span></div>
+                          <div>Diesel: <span className="font-medium text-gray-800">R$ {selectedStation.prices.diesel}</span></div>
                         )}
                       </div>
                     </div>
@@ -293,7 +293,7 @@ const GasStationSelection = () => {
                 onChange={(e) => setStationSearch(e.target.value)}
                 onFocus={() => setShowStationSearch(true)}
                 placeholder="Buscar posto por nome ou localização"
-                className="w-full px-3 py-3 border border-gray-200 rounded-xl focus:border-green-500 focus:outline-none"
+                className="w-full px-3 py-3 border border-gray-200 rounded-xl focus:border-gray-800 focus:outline-none"
               />
               {stationSearch && (
                 <button
@@ -336,7 +336,7 @@ const GasStationSelection = () => {
                             )}
                           </div>
                           {station.prices && station.prices.gasolina_comum && (
-                            <div className="text-xs text-green-600 font-medium">
+                            <div className="text-xs text-gray-800 font-medium">
                               Comum: R$ {station.prices.gasolina_comum}
                             </div>
                           )}
@@ -386,7 +386,7 @@ const GasStationSelection = () => {
                   value={newStationForm.name}
                   onChange={(e) => setNewStationForm(prev => ({ ...prev, name: e.target.value }))}
                   placeholder="Ex: Shell da Esquina, Posto do João, etc."
-                  className="w-full px-3 py-3 border border-gray-200 rounded-xl focus:border-green-500 focus:outline-none"
+                  className="w-full px-3 py-3 border border-gray-200 rounded-xl focus:border-gray-800 focus:outline-none"
                 />
                 <p className="text-xs text-gray-500 mt-1">
                   Pode ser o nome oficial ou um apelido que você usa
@@ -402,7 +402,7 @@ const GasStationSelection = () => {
                   value={newStationForm.address}
                   onChange={(e) => setNewStationForm(prev => ({ ...prev, address: e.target.value }))}
                   placeholder="Ex: Av. Paulista, 1000 ou próximo ao shopping"
-                  className="w-full px-3 py-3 border border-gray-200 rounded-xl focus:border-green-500 focus:outline-none"
+                  className="w-full px-3 py-3 border border-gray-200 rounded-xl focus:border-gray-800 focus:outline-none"
                 />
                 <p className="text-xs text-gray-500 mt-1">
                   Endereço completo ou uma referência que te ajude a lembrar
@@ -465,7 +465,7 @@ const GasStationSelection = () => {
                             </div>
                           </div>
                           {station.prices && station.prices.gasolina_comum && (
-                            <div className="text-xs text-green-600 font-medium">
+                            <div className="text-xs text-gray-800 font-medium">
                               Comum: R$ {station.prices.gasolina_comum}
                             </div>
                           )}
@@ -511,7 +511,7 @@ const GasStationSelection = () => {
                             </div>
                           </div>
                           {station.prices && station.prices.gasolina_comum && (
-                            <div className="text-xs text-green-600 font-medium">
+                            <div className="text-xs text-gray-800 font-medium">
                               Comum: R$ {station.prices.gasolina_comum}
                             </div>
                           )}
@@ -553,7 +553,7 @@ const GasStationSelection = () => {
                             <span className="text-green-600 font-medium">{station.distance}</span>
                           </div>
                           {station.prices && station.prices.gasolina_comum && (
-                            <div className="text-xs text-green-600 font-medium">
+                            <div className="text-xs text-gray-800 font-medium">
                               Comum: R$ {station.prices.gasolina_comum}
                             </div>
                           )}

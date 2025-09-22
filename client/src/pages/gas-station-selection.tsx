@@ -205,7 +205,7 @@ const GasStationSelection = () => {
             <p className="text-sm text-gray-500">{currentVehicle.name} • {currentVehicle.plate}</p>
           </div>
           <div className="flex items-center gap-2">
-            <div className="w-2 h-2 rounded-full bg-green-600"></div>
+            <div className="w-2 h-2 rounded-full bg-gray-800"></div>
             <div className="w-2 h-2 rounded-full bg-gray-300"></div>
             <div className="w-2 h-2 rounded-full bg-gray-300"></div>
             <span className="text-xs text-gray-500 ml-1">1/3</span>
@@ -217,10 +217,10 @@ const GasStationSelection = () => {
         {/* Posto selecionado */}
         {selectedStation && (
           <div className="bg-white rounded-2xl border border-gray-200 overflow-hidden">
-            <div className="p-4 border-b border-gray-100 bg-green-50">
+            <div className="p-4 border-b border-gray-100 bg-gray-50">
               <div className="flex items-center gap-2">
-                <Check className="w-4 h-4 text-green-600" />
-                <span className="text-sm font-semibold text-green-900">Posto Selecionado</span>
+                <Check className="w-4 h-4 text-gray-800" />
+                <span className="text-sm font-semibold text-gray-900">Posto Selecionado</span>
               </div>
             </div>
 
@@ -354,7 +354,7 @@ const GasStationSelection = () => {
                     </div>
                     <button
                       onClick={handleAddStation}
-                      className="inline-flex items-center gap-2 px-4 py-2 bg-green-600 text-white text-sm font-medium rounded-lg hover:bg-green-700 transition-colors"
+                      className="inline-flex items-center gap-2 px-4 py-2 bg-gray-800 text-white text-sm font-medium rounded-lg hover:bg-gray-700 transition-colors"
                     >
                       <Plus className="w-4 h-4" />
                       Adicionar Posto Manualmente
@@ -369,10 +369,10 @@ const GasStationSelection = () => {
         {/* Formulário para adicionar novo posto */}
         {showAddStation && (
           <div className="bg-white rounded-2xl border border-gray-200 overflow-hidden">
-            <div className="p-4 border-b border-gray-100 bg-green-50">
+            <div className="p-4 border-b border-gray-100 bg-gray-50">
               <div className="flex items-center gap-2">
-                <Plus className="w-4 h-4 text-green-600" />
-                <span className="text-sm font-semibold text-green-900">Adicionar Novo Posto</span>
+                <Plus className="w-4 h-4 text-gray-800" />
+                <span className="text-sm font-semibold text-gray-900">Adicionar Novo Posto</span>
               </div>
             </div>
 
@@ -412,7 +412,7 @@ const GasStationSelection = () => {
               <div className="flex gap-3 pt-2">
                 <button
                   onClick={handleSaveNewStation}
-                  className="flex-1 py-3 bg-green-600 text-white font-medium rounded-xl hover:bg-green-700 transition-colors"
+                  className="flex-1 py-3 bg-gray-800 text-white font-medium rounded-xl hover:bg-gray-700 transition-colors"
                 >
                   Adicionar Posto
                 </button>
@@ -527,7 +527,7 @@ const GasStationSelection = () => {
             <div className="bg-white rounded-2xl border border-gray-200 overflow-hidden">
               <div className="p-4 border-b border-gray-100 bg-gray-50">
                 <div className="flex items-center gap-2">
-                  <MapPin className="w-4 h-4 text-green-600" />
+                  <MapPin className="w-4 h-4 text-gray-800" />
                   <h3 className="font-semibold text-gray-900">Postos Próximos</h3>
                 </div>
               </div>
@@ -550,7 +550,7 @@ const GasStationSelection = () => {
                         </div>
                         <div className="flex items-center justify-between">
                           <div className="flex items-center gap-3 text-xs">
-                            <span className="text-green-600 font-medium">{station.distance}</span>
+                            <span className="text-gray-800 font-medium">{station.distance}</span>
                           </div>
                           {station.prices && station.prices.gasolina_comum && (
                             <div className="text-xs text-gray-800 font-medium">
@@ -575,7 +575,7 @@ const GasStationSelection = () => {
             // Se tem posto selecionado, mostra apenas o botão de continuar com o posto
             <button
               onClick={handleContinue}
-              className="w-full py-4 rounded-2xl font-semibold bg-green-600 text-white active:scale-95 hover:bg-green-700 transition-all duration-200"
+              className="w-full py-4 rounded-2xl font-semibold bg-gray-800 text-white active:scale-95 hover:bg-gray-700 transition-all duration-200"
             >
               Continuar com {selectedStation.name}
             </button>

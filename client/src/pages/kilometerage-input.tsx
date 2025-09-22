@@ -8,9 +8,9 @@ import {
   Mic, 
   Upload,
   AlertCircle,
-  MapPin,
-  Gauge
+  MapPin
 } from 'lucide-react';
+import { OdometerIcon } from '../components/custom-icons';
 
 const KilometerageInputScreen = () => {
   const [, setLocation] = useLocation();
@@ -276,7 +276,7 @@ const KilometerageInputScreen = () => {
         <div className="bg-white rounded-2xl border border-gray-200 overflow-hidden">
           <div className="p-4 border-b border-gray-100 bg-blue-50">
             <div className="flex items-center gap-2">
-              <Gauge className="w-4 h-4 text-blue-600" />
+              <OdometerIcon size={16} className="text-blue-600" />
               <span className="text-sm font-semibold text-blue-900">Quilometragem do Odômetro</span>
             </div>
           </div>

@@ -7,7 +7,7 @@ import {
   TrendingDown, 
   Minus,
   MapPin,
-  Gauge,
+  DollarSign,
   Fuel,
   Calendar,
   Activity,
@@ -328,7 +328,7 @@ const FuelSummaryScreen = () => {
             <div className="flex items-center justify-between mb-3">
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center">
-                  <Gauge className="w-5 h-5 text-purple-600" />
+                  <DollarSign className="w-5 h-5 text-purple-600" />
                 </div>
                 <div>
                   <h4 className="text-base font-medium text-gray-900">Valor do Abastecimento</h4>
